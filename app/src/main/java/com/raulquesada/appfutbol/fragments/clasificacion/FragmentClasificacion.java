@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.raulquesada.appfutbol.EquipoActivity;
+import com.raulquesada.appfutbol.MainActivity;
 import com.raulquesada.appfutbol.listeners.listas.IEquipoClasificacionListener;
 import com.raulquesada.appfutbol.R;
 import com.raulquesada.appfutbol.adapters.ClasificacionAdapter;
@@ -122,6 +123,7 @@ public class FragmentClasificacion extends Fragment implements IGetEquiposEnClas
             eEC.setDivision(myPrefs.getInt("division",1));
             Intent i = new Intent(getContext(), EquipoActivity.class);
             i.putExtra("Equipo",eEC);
+            i.putExtra(MainActivity.EXTRA_MAIN,1);
             startActivity(i);//Carga activity equipo
         }
     }

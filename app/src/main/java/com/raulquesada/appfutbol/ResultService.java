@@ -31,7 +31,6 @@ import com.raulquesada.appfutbol.util.Lib;
 import java.util.ArrayList;
 
 public class ResultService extends IntentService  {
-    public static final String EXTRA_RESULT = "result";
 
     private NotificationManager notificationManager;
     private PendingIntent pendingIntent;
@@ -53,7 +52,7 @@ public class ResultService extends IntentService  {
         context = this.getApplicationContext();
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Intent mIntent = new Intent(this, MainActivity.class); //Cargamos el intent al mainactivity
-        mIntent.putExtra(EXTRA_RESULT,0);
+        mIntent.putExtra(MainActivity.EXTRA_MAIN,2);
         Resources res = this.getResources();
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 

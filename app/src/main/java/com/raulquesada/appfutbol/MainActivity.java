@@ -56,6 +56,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IGetEquiposFavoritosListener{
+    public static final String EXTRA_MAIN = "extramain";
     public static final String TAG ="favouriteTeams";
     private static final int PRIMERA_DIVISION = 1;
     private static final int SEGUNDA_DIVISION = 2;
@@ -75,11 +76,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private GoogleSignInClient mGoogleSignInCliente;
     private FirebaseAuth mAuth;
     private NotificationsManager notificationsManager;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bundle = savedInstanceState;
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -134,46 +137,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (task.isSuccessful()){
                     if (!task.getResult().isEmpty()){
                         onGetEquiposFavoritos(task);
+                    }else {
+                        initFragment();
                     }
                 }else {
                     Log.e(MainActivity.class.getSimpleName(),"Error al obtener los documentos" + task.getException());
                 }
             }
         });
-        int extra = -1;
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                extra = -1;
-            } else {
-                extra= extras.getInt(ResultService.EXTRA_RESULT);
-            }
-        } else {
-            extra= (int) savedInstanceState.getSerializable(ResultService.EXTRA_RESULT);
-        }
-        if (extra==0){
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentFavorito(listaEquipos,myPrefs.getBoolean("log",false))).commit();
-            bottomNavigationView.setSelectedItemId(R.id.fragmentFavorito);
-        }else {
-            switch (prefs.getString("opcionAbrirAppPestanya","Clasificación")){
-                case "Clasificación":
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentClasificacion()).commit();
-                    bottomNavigationView.setSelectedItemId(R.id.fragmentClasificacion);
-                    break;
-                case "En Directo":
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentDirecto()).commit();
-                    bottomNavigationView.setSelectedItemId(R.id.fragmentDirecto);
-                    break;
-                case "Favoritos":
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentFavorito(listaEquipos,myPrefs.getBoolean("log",false))).commit();
-                    bottomNavigationView.setSelectedItemId(R.id.fragmentFavorito);
-                    break;
-                case "Resultado":
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentJornada()).commit();
-                    bottomNavigationView.setSelectedItemId(R.id.fragmentJornada);
-                    break;
-            }
-        }
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -327,5 +298,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         notificationsManager = new NotificationsManager(listaEquipos,getApplicationContext());
         notificationsManager.init();
+        initFragment();
+    }
+    private void initFragment(){
+        int extra;
+        if (bundle == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                extra = Integer.MIN_VALUE;
+            } else {
+                extra= extras.getInt(EXTRA_MAIN);
+            }
+        } else {
+            extra= (int) bundle.getSerializable(EXTRA_MAIN);
+        }
+        if (extra==2){
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentFavorito(listaEquipos,myPrefs.getBoolean("log",false))).commit();
+            bottomNavigationView.setSelectedItemId(R.id.fragmentFavorito);
+        }else if (extra==1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentClasificacion()).commit();
+            bottomNavigationView.setSelectedItemId(R.id.fragmentClasificacion);
+        }else{
+            switch (prefs.getString("opcionAbrirAppPestanya","Clasificación")){
+                case "Clasificación":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentClasificacion()).commit();
+                    bottomNavigationView.setSelectedItemId(R.id.fragmentClasificacion);
+                    break;
+                case "En Directo":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentDirecto()).commit();
+                    bottomNavigationView.setSelectedItemId(R.id.fragmentDirecto);
+                    break;
+                case "Favoritos":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentFavorito(listaEquipos,myPrefs.getBoolean("log",false))).commit();
+                    bottomNavigationView.setSelectedItemId(R.id.fragmentFavorito);
+                    break;
+                case "Resultado":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentJornada()).commit();
+                    bottomNavigationView.setSelectedItemId(R.id.fragmentJornada);
+                    break;
+            }
+        }
     }
 }

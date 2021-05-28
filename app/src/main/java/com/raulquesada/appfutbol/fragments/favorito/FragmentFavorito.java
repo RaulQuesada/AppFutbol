@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.raulquesada.appfutbol.EquipoActivity;
+import com.raulquesada.appfutbol.MainActivity;
 import com.raulquesada.appfutbol.R;
 import com.raulquesada.appfutbol.adapters.ClasificacionAdapter;
 import com.raulquesada.appfutbol.adapters.FavoritosAdapter;
@@ -49,7 +50,7 @@ public class FragmentFavorito extends Fragment implements IEquipoClasificacionLi
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getActivity().setTitle("Favoritos");
-        if (!equiposFavoritos.isEmpty()){
+        if (signin && !equiposFavoritos.isEmpty()){
             rvListadoEquiposFavoritos = getView().findViewById(R.id.rvListadoEquiposFavoritos);
             rvListadoEquiposFavoritos.setAdapter(new FavoritosAdapter(equiposFavoritos,this));
             rvListadoEquiposFavoritos.setHasFixedSize(true);
@@ -61,6 +62,7 @@ public class FragmentFavorito extends Fragment implements IEquipoClasificacionLi
     public void onEquipoSeleccionado(Equipo eEC) {
         Intent i = new Intent(getContext(), EquipoActivity.class);
         i.putExtra("Equipo",eEC);
+        i.putExtra(MainActivity.EXTRA_MAIN,2);
         startActivity(i);//Carga activity equipo
     }
 }

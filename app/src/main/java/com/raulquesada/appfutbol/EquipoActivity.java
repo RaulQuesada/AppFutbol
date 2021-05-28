@@ -123,6 +123,8 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                int extra = getIntent().getIntExtra(MainActivity.EXTRA_MAIN,1);
+                i.putExtra(MainActivity.EXTRA_MAIN,extra);
                 startActivity(i);
                 break;
 
