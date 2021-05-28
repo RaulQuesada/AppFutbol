@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/customborder">
+
+    <ImageView
+        android:id="@+id/ivPartidoLocal"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <ImageView
+        android:id="@+id/ivPartidoVisitor"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPartidoLocal"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/tvPartidoLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="Local"
+        android:textAlignment="center"
+        android:textSize="13dp"
+        app:layout_constraintStart_toEndOf="@+id/ivPartidoLocal"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPartidoVisitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="Visitante"
+        android:textAlignment="center"
+        android:textSize="13dp"
+        app:layout_constraintStart_toEndOf="@+id/ivPartidoVisitor"
+        app:layout_constraintTop_toBottomOf="@+id/tvPartidoLocal" />
+
+    <TextView
+        android:id="@+id/tvGoalsLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginEnd="16dp"
+        android:text="0"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvGoalsVisitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:text="0"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGoalsLocal" />
+
+    <TextView
+        android:id="@+id/tvLiveMinutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="0'"
+        android:textAlignment="viewEnd"
+        android:textColor="#FF0000"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGoalsVisitor"
+        app:layout_constraintEnd_toStartOf="@+id/tvGoalsLocal"
+        app:layout_constraintTop_toTopOf="@+id/tvGoalsLocal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

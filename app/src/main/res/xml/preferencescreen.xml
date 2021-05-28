@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="Notificaciones Favoritos">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="opcionNotiPrePartido"
+            android:title="Comienzo del partido" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="opcionNotiPostPartido"
+            android:title="Resultado del partido" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Configuración de arranque">
+        <ListPreference
+            android:key="opcionAbrirAppLiga"
+            android:title="Liga mostrada al abrir App"
+            android:dialogTitle="Indicar Liga"
+            android:entries="@array/liga"
+            android:entryValues="@array/codeliga"
+            />
+        <ListPreference
+            android:key="opcionAbrirAppPestanya"
+            android:title="Pestaña mostrada al abrir App"
+            android:dialogTitle="Indicar Pestaña"
+            android:entries="@array/pestanya"
+            android:entryValues="@array/codepestanya"
+            />
+    </PreferenceCategory>
+</PreferenceScreen>

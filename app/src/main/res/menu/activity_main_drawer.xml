@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Seleccionar Liga">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/primeraDivision"
+                    android:title="LaLiga Santander"/>
+                <item
+                    android:id="@+id/segundaDivision"
+                    android:title="LaLiga SmartBank"/>
+            </group>
+        </menu>
+    </item>
+</menu>

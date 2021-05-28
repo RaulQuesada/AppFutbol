@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/includeEquipo"
+        layout="@layout/toolbar_equipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <fragment
+        android:id="@+id/FrgEquipo"
+        android:name="com.raulquesada.appfutbol.fragments.equipo.FragmentEquipo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        android:layout_weight="65" />
+
+    <fragment
+        android:id="@+id/FrgEquipoDetalle"
+        android:name="com.raulquesada.appfutbol.fragments.equipo.FragmentDetalleEquipoPlantilla"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        android:layout_weight="40" />
+</LinearLayout>

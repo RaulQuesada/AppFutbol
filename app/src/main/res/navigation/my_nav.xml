@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/fragmentJornada">
+
+    <fragment
+        android:id="@+id/fragmentJornada"
+        android:name="com.raulquesada.appfutbol.fragments.jornada.FragmentJornada"
+        android:label="fragment_jornada"
+        tools:layout="@layout/fragment_jornada" />
+    <fragment
+        android:id="@+id/fragmentClasificacion"
+        android:name="com.raulquesada.appfutbol.fragments.clasificacion.FragmentClasificacion"
+        android:label="fragment_listado"
+        tools:layout="@layout/fragment_listado" />
+</navigation>

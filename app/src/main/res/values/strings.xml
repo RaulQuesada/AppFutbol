@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AppFutbol</string>
+    <string name="navigation_drawer_open">Abrir navigation drawer</string>
+    <string name="navigation_drawer_close">Cerrar navigation drawer</string>
+</resources>

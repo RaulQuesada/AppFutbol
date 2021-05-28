@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="liga">
+        <item>LaLiga Santander</item>
+        <item>LaLiga SmartBank</item>
+    </string-array>
+    <string-array name="codeliga">
+        <item>LaLiga Santander</item>
+        <item>LaLiga SmartBank</item>
+    </string-array>
+    <string-array name="pestanya">
+        <item>Clasificación</item>
+        <item>En Directo</item>
+        <item>Favoritos</item>
+        <item>Resultado</item>
+    </string-array>
+    <string-array name="codepestanya">
+        <item>Clasificación</item>
+        <item>En Directo</item>
+        <item>Favoritos</item>
+        <item>Resultado</item>
+    </string-array>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fragmentClasificacion"
+        android:title="Clasificacion" android:icon="@drawable/ic_clasificacion"/>
+
+    <item
+        android:id="@+id/fragmentDirecto"
+        android:icon="@android:drawable/presence_video_busy"
+        android:title="En directo" />
+
+    <item
+        android:id="@+id/fragmentFavorito"
+        android:icon="@android:drawable/btn_star"
+        android:title="Favoritos" />
+
+    <item
+        android:id="@+id/fragmentJornada"
+        android:title="Resulatdos" android:icon="@drawable/ic_resultados"/>
+    <item
+        android:id="@+id/fragmentPreference"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Configuración" />
+</menu>

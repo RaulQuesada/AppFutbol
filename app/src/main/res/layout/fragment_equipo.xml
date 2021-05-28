@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clActivityEquipo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clClasificacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:background="@drawable/headerclasificacion"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/clActivityEquipo">
+
+        <ImageView
+            android:id="@+id/ivFlagEquipo"
+            android:layout_width="30dp"
+            android:layout_height="17dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <TextView
+            android:id="@+id/tvNomEquipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="TEAM"
+            app:layout_constraintStart_toEndOf="@+id/ivFlagEquipo"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/ivShieldEquipo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clClasificacion"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/tvCompeticionEquipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textColor="@color/primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivShieldEquipo"
+        app:layout_constraintTop_toTopOf="@+id/ivShieldEquipo"
+        tools:text="Competición" />
+
+    <TextView
+        android:id="@+id/tvPosicionEquipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#"
+        android:textColor="@color/primary"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvCompeticionEquipo"
+        app:layout_constraintStart_toStartOf="@+id/tvCompeticionEquipo"
+        app:layout_constraintTop_toBottomOf="@+id/tvCompeticionEquipo" />
+
+    <TextView
+        android:id="@+id/tvForma1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:background="@drawable/customborder"
+        android:text="D"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivShieldEquipo"
+        app:layout_constraintTop_toBottomOf="@+id/ivShieldEquipo" />
+
+    <TextView
+        android:id="@+id/tvForma2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/customborder"
+        android:text="-"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tvForma1"
+        app:layout_constraintTop_toTopOf="@+id/tvForma1" />
+
+    <TextView
+        android:id="@+id/tvForma3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/customborder"
+        android:text="-"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tvForma2"
+        app:layout_constraintTop_toTopOf="@+id/tvForma2" />
+
+    <TextView
+        android:id="@+id/tvForma4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/customborder"
+        android:text="-"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tvForma3"
+        app:layout_constraintTop_toTopOf="@+id/tvForma3" />
+
+    <TextView
+        android:id="@+id/tvForma5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/customborder"
+        android:text="-"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tvForma4"
+        app:layout_constraintTop_toTopOf="@+id/tvForma4" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/buttonequipo"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvForma1">
+
+        <TextView
+            android:id="@+id/bPlantillaEquipo"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/nobuttonselected"
+            android:fontFamily="monospace"
+            android:text="Plantilla"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bResultadosEquipo"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/nobuttonselected"
+            android:fontFamily="monospace"
+            android:text="Resultados"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bPartidosEquipo"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/nobuttonselected"
+            android:fontFamily="monospace"
+            android:text="Partidos"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvEstadio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estadio:"
+        android:textColor="@color/primary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvCompeticionEquipo"
+        app:layout_constraintTop_toBottomOf="@+id/clClasificacion" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
