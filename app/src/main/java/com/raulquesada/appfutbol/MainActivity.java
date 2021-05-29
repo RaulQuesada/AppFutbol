@@ -315,8 +315,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 division= extras.getInt(EXTRA_DIVISION);
             }
         } else {
-            extra= (int) bundle.getSerializable(EXTRA_MAIN);
-            division= (int) bundle.getSerializable(EXTRA_DIVISION);
+            extra= (int) getIntent().getExtras().getSerializable(EXTRA_MAIN);
+            division= (int) getIntent().getExtras().getSerializable(EXTRA_DIVISION);
         }
         switch (division){
             case 1:

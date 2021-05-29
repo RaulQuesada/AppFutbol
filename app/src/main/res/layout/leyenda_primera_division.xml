@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cLeyendaPrimeraDivision"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/bColorChamp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@color/cha"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLeyendaChampionsLeague"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="Champions League"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bColorChamp"
+        app:layout_constraintStart_toEndOf="@+id/bColorChamp"
+        app:layout_constraintTop_toTopOf="@+id/bColorChamp" />
+
+    <Button
+        android:id="@+id/bColorEurope"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@color/uefa"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bColorChamp" />
+
+    <TextView
+        android:id="@+id/tvLeyendaEuropaLeague"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="Europa League"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bColorEurope"
+        app:layout_constraintStart_toEndOf="@+id/bColorEurope"
+        app:layout_constraintTop_toBottomOf="@+id/bColorChamp" />
+
+    <Button
+        android:id="@+id/bColorConference"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@color/conf"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bColorEurope" />
+
+    <TextView
+        android:id="@+id/tvLeyendaConferenceLeague"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="Conference League"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bColorConference"
+        app:layout_constraintStart_toEndOf="@+id/bColorConference"
+        app:layout_constraintTop_toBottomOf="@+id/bColorEurope" />
+
+    <Button
+        android:id="@+id/bColorDescenso"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@color/desc"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bColorConference" />
+
+    <TextView
+        android:id="@+id/tvLeyendaDescenso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="Descenso LaLiga SmartBank"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bColorDescenso"
+        app:layout_constraintStart_toEndOf="@+id/bColorDescenso"
+        app:layout_constraintTop_toTopOf="@+id/bColorDescenso" />
+</androidx.constraintlayout.widget.ConstraintLayout>

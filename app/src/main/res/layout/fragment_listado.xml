@@ -3,136 +3,160 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".fragments.clasificacion.FragmentClasificacion">
 
-    <ImageView
-        android:id="@+id/ivCompeticionClasificacion"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
-
-    <TextView
-        android:id="@+id/tvCompeticionNameClasificacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Competición"
-        android:textColor="@color/primary"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ivCompeticionClasificacion"
-        app:layout_constraintTop_toTopOf="@+id/ivCompeticionClasificacion" />
-
-    <TextView
-        android:id="@+id/tvTemporadaClasificacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Temporada"
-        android:textColor="@color/green"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinTemporada"
-        app:layout_constraintStart_toStartOf="@+id/tvCompeticionNameClasificacion"
-        app:layout_constraintTop_toBottomOf="@+id/tvCompeticionNameClasificacion" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clClasificacion"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/headerclasificacion"
-        app:layout_constraintTop_toBottomOf="@+id/ivCompeticionClasificacion"
-        tools:layout_editor_absoluteX="1dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvPosicionClasificacion"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="12dp"
-            android:gravity="center"
-            android:text="Pos"
-            android:textAlignment="center"
-            android:textColor="@color/primary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvEquipoClasificacion"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="Equipo"
-            android:textColor="@color/primary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvPosicionClasificacion"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvPuntosClasificacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:text="Pts"
-            android:textColor="@color/primary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/ivCompeticionClasificacion"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
 
-        <TextView
-            android:id="@+id/tvGoalClasificacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="34dp"
-            android:text="Gavg"
-            android:textColor="@color/primary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvPuntosClasificacion"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tvCompeticionNameClasificacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Competición"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/ivCompeticionClasificacion"
+                app:layout_constraintTop_toTopOf="@+id/ivCompeticionClasificacion" />
 
-        <TextView
-            android:id="@+id/tvPartidosClasificacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="36dp"
-            android:text="PJ"
-            android:textColor="@color/primary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvGoalClasificacion"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvTemporadaClasificacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Temporada"
+                android:textColor="@color/green"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/spinTemporada"
+                app:layout_constraintStart_toStartOf="@+id/tvCompeticionNameClasificacion"
+                app:layout_constraintTop_toBottomOf="@+id/tvCompeticionNameClasificacion" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clClasificacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/headerclasificacion"
+                app:layout_constraintTop_toBottomOf="@+id/ivCompeticionClasificacion"
+                tools:layout_editor_absoluteX="1dp">
+
+                <TextView
+                    android:id="@+id/tvPosicionClasificacion"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="12dp"
+                    android:gravity="center"
+                    android:text="Pos"
+                    android:textAlignment="center"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvEquipoClasificacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="Equipo"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvPosicionClasificacion"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvPuntosClasificacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="Pts"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvGoalClasificacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="34dp"
+                    android:text="Gavg"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tvPuntosClasificacion"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvPartidosClasificacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="36dp"
+                    android:text="PJ"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tvGoalClasificacion"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clClasificacion"
-        app:layout_constraintVertical_bias="1.0">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/clClasificacion">
 
-    </androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
-    <Spinner
-        android:id="@+id/spinTemporada"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/spinnerborder"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/tvTemporadaClasificacion"
-        app:layout_constraintTop_toBottomOf="@+id/tvCompeticionNameClasificacion" />
+            <Spinner
+                android:id="@+id/spinTemporada"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/spinnerborder"
+                android:textAlignment="center"
+                app:layout_constraintStart_toEndOf="@+id/tvTemporadaClasificacion"
+                app:layout_constraintTop_toBottomOf="@+id/tvCompeticionNameClasificacion" />
+
+            <include
+                android:id="@+id/include_leyenda_primera"
+                layout="@layout/leyenda_primera_division"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvListado" />
+
+            <include
+                android:id="@+id/include_leyenda_segunda"
+                layout="@layout/leyenda_segunda_division"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvListado" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

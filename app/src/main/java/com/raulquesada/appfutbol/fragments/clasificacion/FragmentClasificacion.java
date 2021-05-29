@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,6 +44,8 @@ public class FragmentClasificacion extends Fragment implements IGetEquiposEnClas
     private TextView tvCompeticionNameClasificacion;
     private Spinner spinTemporada;
     private RecyclerView rvListado;
+    private ConstraintLayout cLeyendaPrimeraDivision;
+    private ConstraintLayout cLeyendaSegundaDivision;
     private APIManager apiManager;
     private SharedPreferences myPrefs;//Mis preferencias
 
@@ -58,6 +61,8 @@ public class FragmentClasificacion extends Fragment implements IGetEquiposEnClas
         selectedSeason = CURRENT_SEASON;
         myPrefs = this.getActivity().getSharedPreferences("Admin", Context.MODE_PRIVATE);
         rvListado = getView().findViewById(R.id.rvListado);
+        cLeyendaPrimeraDivision = getView().findViewById(R.id.include_leyenda_primera);
+        cLeyendaSegundaDivision = getView().findViewById(R.id.include_leyenda_segunda);
         spinTemporada = getView().findViewById(R.id.spinTemporada);
         setAdapterSpinnerTemporada(Arrays.asList(TEMPORADAS));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvListado.getContext(),DividerItemDecoration.VERTICAL);
@@ -70,10 +75,12 @@ public class FragmentClasificacion extends Fragment implements IGetEquiposEnClas
             case 1:
                 ivCompeticionClasificacion.setImageDrawable(getResources().getDrawable(R.drawable.laliga));
                 tvCompeticionNameClasificacion.setText("LaLiga Santander");
+                cLeyendaPrimeraDivision.setVisibility(View.VISIBLE);
                 break;
             case 2:
                 ivCompeticionClasificacion.setImageDrawable(getResources().getDrawable(R.drawable.laliga2));
                 tvCompeticionNameClasificacion.setText("LaLiga SmartBank");
+                cLeyendaSegundaDivision.setVisibility(View.VISIBLE);
                 break;
         }
 
