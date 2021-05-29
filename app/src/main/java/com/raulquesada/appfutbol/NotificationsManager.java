@@ -12,7 +12,9 @@ import android.util.Log;
 import androidx.preference.PreferenceManager;
 
 import com.raulquesada.appfutbol.listeners.api.IGetLigaListener;
+import com.raulquesada.appfutbol.listeners.api.IGetLigaParaPartidoListener;
 import com.raulquesada.appfutbol.listeners.api.IGetPartidosListener;
+import com.raulquesada.appfutbol.listeners.api.IGetPartidosParaUnPartidoListener;
 import com.raulquesada.appfutbol.models.Equipo;
 import com.raulquesada.appfutbol.models.InfoLiga;
 import com.raulquesada.appfutbol.models.Jornada;
@@ -27,7 +29,7 @@ import java.util.UUID;
 
 import static android.content.Context.ALARM_SERVICE;
 
-public class NotificationsManager implements IGetLigaListener, IGetPartidosListener {
+public class NotificationsManager implements IGetLigaParaPartidoListener, IGetPartidosParaUnPartidoListener {
     private static final String MESSAGE_PRE_PARTIDO = "¡Empieza el partido! Puedes revisar el resultado en directo";
     private static final String MESSAGE_POST_PARTIDO = "¡Terminado! Revisa el resultado en Favoritos";
     public static final String EXTRA_TITLE = "title";
@@ -35,7 +37,6 @@ public class NotificationsManager implements IGetLigaListener, IGetPartidosListe
 
     private SharedPreferences prefs; //Preferencias de la preference screen
     private ArrayList<Equipo> listaEquipos;
-    private Equipo currentEquipo;
     private APIManager apiManager;
     private Context context;
 
@@ -47,23 +48,22 @@ public class NotificationsManager implements IGetLigaListener, IGetPartidosListe
 
     public void init(){
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        apiManager.setGetLigaListener(this);
-        apiManager.setGetPartidos(this);
+        apiManager.setGetLigaParaPartidoListener(this);
+        apiManager.setGetPartidosParaUnPartidoListener(this);
         for (int i = 0; i < listaEquipos.size(); i++) {
-            currentEquipo = listaEquipos.get(i);
-            apiManager.getInfoLiga(currentEquipo.getDivision());
+            apiManager.getInfoLigaParaPartido(listaEquipos.get(i).getDivision(), listaEquipos.get(i));
         }
     }
 
     @Override
-    public void OnGetLiga(InfoLiga infoLiga) {
-        apiManager.getJornada(currentEquipo.getDivision(),Integer.parseInt(infoLiga.getLeague().getCurrent_round()));
+    public void OnGetLigaParaPartido(InfoLiga infoLiga, Equipo equipo) {
+        apiManager.getJornadaParaPartido(equipo.getDivision(),Integer.parseInt(infoLiga.getLeague().getCurrent_round()),equipo);
     }
 
     @Override
-    public void OnGetPartidos(Jornada jornada) {
+    public void OnGetPartidosParaUnPartido(Jornada jornada, Equipo equipo) {
         for (Partido partido : jornada.getPartidos()){
-            if (partido.getIdLocal().equals(currentEquipo.getId()) || partido.getIdVisitor().equals(currentEquipo.getId())){
+            if (partido.getIdLocal().equals(equipo.getId()) || partido.getIdVisitor().equals(equipo.getId())){
                 if (Lib.compareDates(partido.getDate())){
                     prepareAlarm(partido);
                 }else {

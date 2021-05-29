@@ -7,8 +7,11 @@ import com.raulquesada.appfutbol.api.IAPIService;
 import com.raulquesada.appfutbol.listeners.api.IGetEquiposEnClasificacionListener;
 import com.raulquesada.appfutbol.listeners.api.IGetEquiposEnLiga;
 import com.raulquesada.appfutbol.listeners.api.IGetLigaListener;
+import com.raulquesada.appfutbol.listeners.api.IGetLigaParaPartidoListener;
 import com.raulquesada.appfutbol.listeners.api.IGetPartidosListener;
+import com.raulquesada.appfutbol.listeners.api.IGetPartidosParaUnPartidoListener;
 import com.raulquesada.appfutbol.listeners.api.IGetPlantillaListener;
+import com.raulquesada.appfutbol.models.Equipo;
 import com.raulquesada.appfutbol.models.InfoLiga;
 import com.raulquesada.appfutbol.models.Jornada;
 import com.raulquesada.appfutbol.models.Liga;
@@ -24,8 +27,10 @@ public class APIManager {
     private IAPIService iapiService;
 
     private IGetLigaListener getLigaListener;
+    private IGetLigaParaPartidoListener getLigaParaPartidoListener;
     private IGetEquiposEnClasificacionListener getEquiposEnClasificacionListener;
     private IGetPartidosListener getPartidosListener;
+    private IGetPartidosParaUnPartidoListener getPartidosParaUnPartidoListener;
     private IGetPlantillaListener getPlantillaListener;
     private IGetEquiposEnLiga getEquiposEnLiga;
 
@@ -70,12 +75,42 @@ public class APIManager {
         });
     }
 
+    public void getJornadaParaPartido(int division, int jornada, Equipo equipo){
+        iapiService.getJornada(division, jornada).enqueue(new Callback<Jornada>() {
+            @Override
+            public void onResponse(Call<Jornada> call, Response<Jornada> response) {
+                if (response.isSuccessful()){
+                    getPartidosParaUnPartidoListener.OnGetPartidosParaUnPartido(response.body(), equipo);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Jornada> call, Throwable t){
+            }
+        });
+    }
+
     public void getInfoLiga(int nLiga){
         iapiService.getLiga(nLiga).enqueue(new Callback<InfoLiga>() {
             @Override
             public void onResponse(Call<InfoLiga> call, Response<InfoLiga> response) {
                 if (response.isSuccessful()){
                     getLigaListener.OnGetLiga(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<InfoLiga> call, Throwable t) {
+            }
+        });
+    }
+
+    public void getInfoLigaParaPartido(int nLiga, Equipo equipo){
+        iapiService.getLiga(nLiga).enqueue(new Callback<InfoLiga>() {
+            @Override
+            public void onResponse(Call<InfoLiga> call, Response<InfoLiga> response) {
+                if (response.isSuccessful()){
+                    getLigaParaPartidoListener.OnGetLigaParaPartido(response.body(),equipo);
                 }
             }
 
@@ -135,5 +170,13 @@ public class APIManager {
 
     public void setGetEquiposEnLiga(IGetEquiposEnLiga getEquiposEnLiga) {
         this.getEquiposEnLiga = getEquiposEnLiga;
+    }
+
+    public void setGetLigaParaPartidoListener(IGetLigaParaPartidoListener getLigaParaPartidoListener) {
+        this.getLigaParaPartidoListener = getLigaParaPartidoListener;
+    }
+
+    public void setGetPartidosParaUnPartidoListener(IGetPartidosParaUnPartidoListener getPartidosParaUnPartidoListener) {
+        this.getPartidosParaUnPartidoListener = getPartidosParaUnPartidoListener;
     }
 }
