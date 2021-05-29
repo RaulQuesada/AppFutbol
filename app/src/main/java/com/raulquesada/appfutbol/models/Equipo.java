@@ -76,6 +76,7 @@ public class Equipo implements Serializable {
     private String form;
 
     private int division;
+    private Partido partidoFavorito;
 
     public Equipo(String team, String mark, String points, int wins, int draws, int losses, String shield, String gf, String ga, int avg, String round, String pos, String countrycode, String abbr, String form) {
         this.team = team;
@@ -93,6 +94,14 @@ public class Equipo implements Serializable {
         this.abbr = abbr;
         this.form = form;
         this.mark = mark;
+    }
+
+    public Partido getPartidoFavorito() {
+        return partidoFavorito;
+    }
+
+    public void setPartidoFavorito(Partido partidoFavorito) {
+        this.partidoFavorito = partidoFavorito;
     }
 
     public String getId() {

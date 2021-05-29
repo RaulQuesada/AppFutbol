@@ -125,6 +125,7 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 int extra = getIntent().getIntExtra(MainActivity.EXTRA_MAIN,1);
                 i.putExtra(MainActivity.EXTRA_MAIN,extra);
+                i.putExtra(MainActivity.EXTRA_DIVISION,eQC.getDivision());
                 startActivity(i);
                 break;
 

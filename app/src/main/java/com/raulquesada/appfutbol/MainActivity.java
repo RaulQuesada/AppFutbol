@@ -57,9 +57,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IGetEquiposFavoritosListener{
     public static final String EXTRA_MAIN = "extramain";
+    public static final String EXTRA_DIVISION = "extradivision";
     public static final String TAG ="favouriteTeams";
-    private static final int PRIMERA_DIVISION = 1;
-    private static final int SEGUNDA_DIVISION = 2;
+    public static final int PRIMERA_DIVISION = 1;
+    public static final int SEGUNDA_DIVISION = 2;
 
     private FirebaseFirestore db;
     private CollectionReference reference;
@@ -115,9 +116,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         reference = db.collection(TAG);
 
         myPrefs = getSharedPreferences("Admin", Context.MODE_PRIVATE);
+        editor = myPrefs.edit();
+
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        editor = myPrefs.edit();
         switch (prefs.getString("opcionAbrirAppLiga","LaLiga Santander")){
             case "LaLiga Santander":
                 editor.putInt("division", PRIMERA_DIVISION).apply();
@@ -302,15 +304,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private void initFragment(){
         int extra;
+        int division;
         if (bundle == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 extra = Integer.MIN_VALUE;
+                division = Integer.MIN_VALUE;
             } else {
                 extra= extras.getInt(EXTRA_MAIN);
+                division= extras.getInt(EXTRA_DIVISION);
             }
         } else {
             extra= (int) bundle.getSerializable(EXTRA_MAIN);
+            division= (int) bundle.getSerializable(EXTRA_DIVISION);
+        }
+        switch (division){
+            case 1:
+                editor.putInt("division", PRIMERA_DIVISION).apply();
+                setTitle("LaLiga Santander");
+                navigationView.setCheckedItem(R.id.primeraDivision);
+                break;
+            case 2:
+                editor.putInt("division", SEGUNDA_DIVISION).apply();
+                setTitle("LaLiga SmartBank");
+                navigationView.setCheckedItem(R.id.segundaDivision);
+                break;
         }
         if (extra==2){
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new FragmentFavorito(listaEquipos,myPrefs.getBoolean("log",false))).commit();

@@ -36,15 +36,15 @@ import java.util.List;
 
 public class FragmentFavorito extends Fragment implements IEquipoClasificacionListener, IGetLigaParaPartidoListener, IGetPartidosParaUnPartidoListener {
     private List<Equipo> equiposFavoritos;
-    private List<Partido> partidosFavoritos;
     private RecyclerView rvListadoEquiposFavoritos;
     private APIManager apiManager;
     private boolean signin;
+    private int equiposConPartidoFavorito;
 
     public FragmentFavorito(List<Equipo> equiposFavoritos, boolean signin){
         this.equiposFavoritos = equiposFavoritos;
         this.signin = signin;
-        partidosFavoritos = new ArrayList<>();
+        equiposConPartidoFavorito = 0;
     }
 
     @Nullable
@@ -62,6 +62,8 @@ public class FragmentFavorito extends Fragment implements IEquipoClasificacionLi
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        rvListadoEquiposFavoritos = getView().findViewById(R.id.rvListadoEquiposFavoritos);
+
         getActivity().setTitle("Favoritos");
         if (signin && !equiposFavoritos.isEmpty()){
             apiManager = new APIManager(getContext());
@@ -95,12 +97,16 @@ public class FragmentFavorito extends Fragment implements IEquipoClasificacionLi
     public void OnGetPartidosParaUnPartido(Jornada jornada, Equipo equipo) {
         for (Partido partido : jornada.getPartidos()){
             if (partido.getIdLocal().equals(equipo.getId()) || partido.getIdVisitor().equals(equipo.getId())){
-                partidosFavoritos.add(partido);
-                if (partidosFavoritos.size()==equiposFavoritos.size()){
-                    rvListadoEquiposFavoritos = getView().findViewById(R.id.rvListadoEquiposFavoritos);
-                    rvListadoEquiposFavoritos.setAdapter(new FavoritosAdapter(equiposFavoritos,partidosFavoritos,this));
-                    rvListadoEquiposFavoritos.setHasFixedSize(true);
-                    rvListadoEquiposFavoritos.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                for (Equipo equipoFavorito : equiposFavoritos){
+                    if (equipo.getId()==equipoFavorito.getId()){
+                        equipoFavorito.setPartidoFavorito(partido);
+                        equiposConPartidoFavorito++;
+                        if (equiposConPartidoFavorito==equiposFavoritos.size()){
+                            rvListadoEquiposFavoritos.setAdapter(new FavoritosAdapter(equiposFavoritos,this));
+                            rvListadoEquiposFavoritos.setHasFixedSize(true);
+                            rvListadoEquiposFavoritos.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        }
+                    }
                 }
             }
         }
