@@ -2,7 +2,6 @@ package com.raulquesada.appfutbol.fragments.favorito;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,26 +11,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.raulquesada.appfutbol.EquipoActivity;
-import com.raulquesada.appfutbol.MainActivity;
+import com.raulquesada.appfutbol.activities.EquipoActivity;
+import com.raulquesada.appfutbol.activities.MainActivity;
 import com.raulquesada.appfutbol.R;
-import com.raulquesada.appfutbol.adapters.ClasificacionAdapter;
 import com.raulquesada.appfutbol.adapters.FavoritosAdapter;
-import com.raulquesada.appfutbol.listeners.api.IGetEquiposEnClasificacionListener;
-import com.raulquesada.appfutbol.listeners.api.IGetLigaListener;
 import com.raulquesada.appfutbol.listeners.api.IGetLigaParaPartidoListener;
-import com.raulquesada.appfutbol.listeners.api.IGetPartidosListener;
 import com.raulquesada.appfutbol.listeners.api.IGetPartidosParaUnPartidoListener;
 import com.raulquesada.appfutbol.listeners.listas.IEquipoClasificacionListener;
 import com.raulquesada.appfutbol.models.Equipo;
 import com.raulquesada.appfutbol.models.InfoLiga;
 import com.raulquesada.appfutbol.models.Jornada;
 import com.raulquesada.appfutbol.models.Partido;
-import com.raulquesada.appfutbol.models.Tabla;
 import com.raulquesada.appfutbol.util.APIManager;
-import com.raulquesada.appfutbol.util.Lib;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentFavorito extends Fragment implements IEquipoClasificacionListener, IGetLigaParaPartidoListener, IGetPartidosParaUnPartidoListener {

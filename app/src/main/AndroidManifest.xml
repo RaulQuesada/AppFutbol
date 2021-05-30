@@ -13,13 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name=".OpcionesActivity"
+            android:name=".activities.OpcionesActivity"
             android:theme="@style/Theme.AppFutbol" />
         <activity
-            android:name=".EquipoActivity"
+            android:name=".activities.EquipoActivity"
             android:theme="@style/Theme.AppFutbol" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:theme="@style/Theme.AppFutbol">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,10 +28,10 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".ResultService"
+        <service android:name=".notifications.ResultService"
             android:enabled="true"/>
 
-        <receiver android:name="com.raulquesada.appfutbol.AlarmReceiver"
+        <receiver android:name="com.raulquesada.appfutbol.notifications.AlarmReceiver"
             android:enabled="true"
             />
     </application>

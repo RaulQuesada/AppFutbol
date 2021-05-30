@@ -10,9 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.raulquesada.appfutbol.IButtonPartidosListener;
-import com.raulquesada.appfutbol.IButtonPlantillaListener;
-import com.raulquesada.appfutbol.IButtonResultadosListener;
+import com.raulquesada.appfutbol.listeners.button.IButtonPartidosListener;
+import com.raulquesada.appfutbol.listeners.button.IButtonPlantillaListener;
+import com.raulquesada.appfutbol.listeners.button.IButtonResultadosListener;
 import com.raulquesada.appfutbol.R;
 import com.raulquesada.appfutbol.models.Equipo;
 import com.raulquesada.appfutbol.util.Lib;

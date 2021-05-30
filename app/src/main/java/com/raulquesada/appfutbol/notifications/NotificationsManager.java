@@ -1,4 +1,4 @@
-package com.raulquesada.appfutbol;
+package com.raulquesada.appfutbol.notifications;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -6,14 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Parcelable;
 import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
-import com.raulquesada.appfutbol.listeners.api.IGetLigaListener;
 import com.raulquesada.appfutbol.listeners.api.IGetLigaParaPartidoListener;
-import com.raulquesada.appfutbol.listeners.api.IGetPartidosListener;
 import com.raulquesada.appfutbol.listeners.api.IGetPartidosParaUnPartidoListener;
 import com.raulquesada.appfutbol.models.Equipo;
 import com.raulquesada.appfutbol.models.InfoLiga;
@@ -22,7 +19,6 @@ import com.raulquesada.appfutbol.models.Partido;
 import com.raulquesada.appfutbol.util.APIManager;
 import com.raulquesada.appfutbol.util.Lib;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;

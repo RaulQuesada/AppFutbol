@@ -1,4 +1,4 @@
-package com.raulquesada.appfutbol.fragments;
+package com.raulquesada.appfutbol.fragments.config;
 
 import android.os.Bundle;
 

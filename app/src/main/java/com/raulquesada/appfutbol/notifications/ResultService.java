@@ -1,11 +1,10 @@
-package com.raulquesada.appfutbol;
+package com.raulquesada.appfutbol.notifications;
 
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -13,22 +12,12 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.raulquesada.appfutbol.listeners.api.IGetLigaListener;
-import com.raulquesada.appfutbol.listeners.api.IGetPartidosListener;
-import com.raulquesada.appfutbol.models.Equipo;
-import com.raulquesada.appfutbol.models.InfoLiga;
-import com.raulquesada.appfutbol.models.Jornada;
-import com.raulquesada.appfutbol.models.Partido;
-import com.raulquesada.appfutbol.util.APIManager;
-import com.raulquesada.appfutbol.util.Lib;
-
-import java.util.ArrayList;
+import com.raulquesada.appfutbol.activities.MainActivity;
+import com.raulquesada.appfutbol.R;
 
 public class ResultService extends IntentService  {
 

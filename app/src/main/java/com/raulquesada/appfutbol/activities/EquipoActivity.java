@@ -1,4 +1,4 @@
-package com.raulquesada.appfutbol;
+package com.raulquesada.appfutbol.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,9 +19,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.raulquesada.appfutbol.R;
 import com.raulquesada.appfutbol.fragments.equipo.FragmentDetalleEquipoPlantilla;
 import com.raulquesada.appfutbol.fragments.equipo.FragmentDetalleEquipoResultadosPartidos;
 import com.raulquesada.appfutbol.fragments.equipo.FragmentEquipo;
+import com.raulquesada.appfutbol.listeners.button.IButtonPartidosListener;
+import com.raulquesada.appfutbol.listeners.button.IButtonPlantillaListener;
+import com.raulquesada.appfutbol.listeners.button.IButtonResultadosListener;
 import com.raulquesada.appfutbol.models.Equipo;
 
 public class EquipoActivity extends AppCompatActivity implements IButtonPlantillaListener, IButtonPartidosListener, IButtonResultadosListener {

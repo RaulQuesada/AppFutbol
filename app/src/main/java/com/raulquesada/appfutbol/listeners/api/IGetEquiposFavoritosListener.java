@@ -1,4 +1,4 @@
-package com.raulquesada.appfutbol;
+package com.raulquesada.appfutbol.listeners.api;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;

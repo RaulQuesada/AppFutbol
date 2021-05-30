@@ -1,20 +1,16 @@
-package com.raulquesada.appfutbol;
+package com.raulquesada.appfutbol.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 
-import com.raulquesada.appfutbol.fragments.ConfigFragment;
+import com.raulquesada.appfutbol.fragments.config.ConfigFragment;
 
 /**
  * Activity que alberga el fragment de configuración de la prefernece screen
  */
 public class OpcionesActivity extends AppCompatActivity {
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

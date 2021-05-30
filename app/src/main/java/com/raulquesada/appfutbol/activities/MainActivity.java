@@ -1,4 +1,4 @@
-package com.raulquesada.appfutbol;
+package com.raulquesada.appfutbol.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,12 +10,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -43,19 +40,19 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.raulquesada.appfutbol.R;
 import com.raulquesada.appfutbol.fragments.clasificacion.FragmentClasificacion;
 import com.raulquesada.appfutbol.fragments.directo.FragmentDirecto;
 import com.raulquesada.appfutbol.fragments.favorito.FragmentFavorito;
 import com.raulquesada.appfutbol.fragments.jornada.FragmentJornada;
+import com.raulquesada.appfutbol.listeners.api.IGetEquiposFavoritosListener;
 import com.raulquesada.appfutbol.models.Equipo;
+import com.raulquesada.appfutbol.notifications.NotificationsManager;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IGetEquiposFavoritosListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IGetEquiposFavoritosListener {
     public static final String EXTRA_MAIN = "extramain";
     public static final String EXTRA_DIVISION = "extradivision";
     public static final String TAG ="favouriteTeams";

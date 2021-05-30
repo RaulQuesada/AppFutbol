@@ -21,8 +21,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.raulquesada.appfutbol.EquipoActivity;
-import com.raulquesada.appfutbol.MainActivity;
+import com.raulquesada.appfutbol.activities.EquipoActivity;
+import com.raulquesada.appfutbol.activities.MainActivity;
 import com.raulquesada.appfutbol.listeners.listas.IEquipoClasificacionListener;
 import com.raulquesada.appfutbol.R;
 import com.raulquesada.appfutbol.adapters.ClasificacionAdapter;
@@ -31,7 +31,6 @@ import com.raulquesada.appfutbol.models.Equipo;
 import com.raulquesada.appfutbol.models.Tabla;
 import com.raulquesada.appfutbol.util.APIManager;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
