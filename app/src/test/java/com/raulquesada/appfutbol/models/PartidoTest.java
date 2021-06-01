@@ -3,10 +3,16 @@ package com.raulquesada.appfutbol.models;
 import org.junit.Assert;
 import org.junit.Test;
 
-class PartidoTest {
+/**
+ * The type Partido test.
+ */
+public class PartidoTest {
 
+    /**
+     * Test partido.
+     */
     @Test
-    void testPartido(){
+    public void testPartido(){
         final String ID_LOCAL = "idlocal";
         final String ID_VISITOR = "idvisitor";
         final String JORNADA = "jornada";

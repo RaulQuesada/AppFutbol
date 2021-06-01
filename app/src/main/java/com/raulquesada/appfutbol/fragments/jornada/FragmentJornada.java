@@ -29,13 +29,37 @@ import com.raulquesada.appfutbol.models.Jornada;
 import com.raulquesada.appfutbol.models.Partido;
 import com.raulquesada.appfutbol.util.APIManager;
 
+/**
+ * The type Fragment jornada.
+ */
 public class FragmentJornada extends Fragment implements IGetPartidosListener, IGetLigaListener, NumberPicker.OnValueChangeListener, IPartidoJornadaListener {
+    /**
+     * The Current jornada.
+     */
     private int currentJornada;
+    /**
+     * The Max jornada.
+     */
     private int maxJornada;
+    /**
+     * The Rv listado jornada.
+     */
     private RecyclerView rvListadoJornada;
+    /**
+     * The Tv jornada.
+     */
     private TextView tvJornada;
+    /**
+     * The B seleccionar jornada.
+     */
     private Button bSeleccionarJornada;
+    /**
+     * The Api manager.
+     */
     private APIManager apiManager;
+    /**
+     * The My prefs.
+     */
     private SharedPreferences myPrefs;//Mis preferencias
 
     @Nullable
@@ -47,6 +71,9 @@ public class FragmentJornada extends Fragment implements IGetPartidosListener, I
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //Inicializo variables y componentes
+
         myPrefs = this.getActivity().getSharedPreferences("Admin", Context.MODE_PRIVATE);
         rvListadoJornada = getView().findViewById(R.id.rvListadoJornada);
         tvJornada = getView().findViewById(R.id.tvJornada);
@@ -56,10 +83,11 @@ public class FragmentJornada extends Fragment implements IGetPartidosListener, I
         apiManager.setGetLigaListener(this);
         apiManager.getInfoLiga(myPrefs.getInt("division",1));
 
+        //Cuando el usaurio pulsa en el botón de seleccionarJornada
         bSeleccionarJornada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectJornadaDialog f;
+                SelectJornadaDialog f;//Dialogo NumberPicker
                 if (myPrefs.getInt("division",1)==1){
                     f = new SelectJornadaDialog(maxJornada,currentJornada);
                 }else {
@@ -67,12 +95,17 @@ public class FragmentJornada extends Fragment implements IGetPartidosListener, I
                 }
                 f.setValueChangeListener(FragmentJornada.this);
                 FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();//Actualizo la jornada
                 f.show(fragmentTransaction,"Seleccionar Jornada ");
             }
         });
     }
 
+    /**
+     * Cuando recibo los partidos de la API
+     * Set adapter el RecyclerView con los partidos
+     * @param jornada con los partidos
+     */
     @Override
     public void OnGetPartidos(Jornada jornada) {
         rvListadoJornada.setAdapter(new JornadaAdapter(jornada.getPartidos(), this));
@@ -80,12 +113,22 @@ public class FragmentJornada extends Fragment implements IGetPartidosListener, I
         rvListadoJornada.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     }
 
+    /**
+     * Cuando el valor del NumberPicker cambia
+     * @param picker NumberPicker
+     * @param oldVal valor antiguo
+     * @param newVal valor nuevo
+     */
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
         apiManager.getJornada(myPrefs.getInt("division",1),picker.getValue());
         tvJornada.setText("Jornada "+ picker.getValue());
     }
 
+    /**
+     * Cuando recibo la inforamción de la liga
+     * @param infoLiga información de la liga
+     */
     @Override
     public void OnGetLiga(InfoLiga infoLiga) {
         currentJornada = Integer.parseInt(infoLiga.getLeague().getCurrent_round());
@@ -95,6 +138,11 @@ public class FragmentJornada extends Fragment implements IGetPartidosListener, I
         tvJornada.setText("Jornada "+ currentJornada);
     }
 
+    /**
+     * Cuando el usuario pincha en un partido
+     * Salta un diálogo con datos del partido
+     * @param partido seleccionado
+     */
     @Override
     public void onPartidoSeleccionado(Partido partido) {
         ResultDialog dialog = new ResultDialog(partido);

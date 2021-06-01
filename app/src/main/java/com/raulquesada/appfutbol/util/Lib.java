@@ -4,7 +4,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The type Lib.
+ */
 public class Lib {
+    /**
+     * Get stadium string.
+     *
+     * @param idlocalTeam the idlocal team
+     * @return the string
+     */
     public static String getStadium(int idlocalTeam){
         switch (idlocalTeam){
             case 137:
@@ -95,6 +104,12 @@ public class Lib {
         return "";
     }
 
+    /**
+     * Change format date string.
+     *
+     * @param date the date
+     * @return the string
+     */
     public static String changeFormatDate(String date) {
         try {
             Date date1=new SimpleDateFormat("yyyy/MM/dd").parse(date);
@@ -105,12 +120,19 @@ public class Lib {
         }
         return date;
     }
+
+    /**
+     * Compare dates boolean.
+     *
+     * @param dateMatch the date match
+     * @return the boolean
+     */
     public static boolean compareDates(String dateMatch){
         SimpleDateFormat sdformat = new SimpleDateFormat("yyyy/MM/dd");
         try {
             Date d1 = sdformat.parse(dateMatch);
             //sdformat.format(new Date())
-            Date d2 = sdformat.parse("2021/05/22");
+            Date d2 = sdformat.parse(sdformat.format(new Date()));
             if(d1.compareTo(d2) == 0) {
                 return true;
             }

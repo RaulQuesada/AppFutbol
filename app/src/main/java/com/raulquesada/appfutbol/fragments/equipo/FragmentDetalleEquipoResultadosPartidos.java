@@ -27,18 +27,48 @@ import com.raulquesada.appfutbol.util.APIManager;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Fragment detalle equipo resultados partidos.
+ */
 public class FragmentDetalleEquipoResultadosPartidos extends Fragment implements IGetLigaListener, IGetPartidosListener, IPartidoJornadaListener {
+    /**
+     * The constant RESULTADOS_LIMIT.
+     */
     private static final int RESULTADOS_LIMIT = 5;
+    /**
+     * The Rv listado detalle.
+     */
     private RecyclerView rvListadoDetalle;
+    /**
+     * The Api manager.
+     */
     private APIManager apiManager;
+    /**
+     * The Played matches.
+     */
     private boolean playedMatches;
+    /**
+     * The Equipo.
+     */
     private Equipo equipo;
+    /**
+     * The Partidos.
+     */
     private List<Partido> partidos;
 
+    /**
+     * Instantiates a new Fragment detalle equipo resultados partidos.
+     */
     public FragmentDetalleEquipoResultadosPartidos(){
 
     }
 
+    /**
+     * Instantiates a new Fragment detalle equipo resultados partidos.
+     *
+     * @param equipo        the equipo
+     * @param playedMatches the played matches
+     */
     public FragmentDetalleEquipoResultadosPartidos(Equipo equipo, boolean playedMatches){
         this.equipo = equipo;
         this.playedMatches=playedMatches;
@@ -61,6 +91,10 @@ public class FragmentDetalleEquipoResultadosPartidos extends Fragment implements
         return inflater.inflate(R.layout.fragment_detalle_equipo, container, false);
     }
 
+    /**
+     * Cuando recibo la información de la liga
+     * @param infoLiga información de la liga
+     */
     @Override
     public void OnGetLiga(InfoLiga infoLiga) {
         for (int i = 1; i <=RESULTADOS_LIMIT ; i++) {
@@ -72,6 +106,10 @@ public class FragmentDetalleEquipoResultadosPartidos extends Fragment implements
         }
     }
 
+    /**
+     * Cuando recibo los partidos de la jornada, aplico un filtro para quedarme con los partidos del equipo
+     * @param jornada con los partidos
+     */
     @Override
     public void OnGetPartidos(Jornada jornada) {
         for (Partido partido : jornada.getPartidos()){
@@ -79,9 +117,14 @@ public class FragmentDetalleEquipoResultadosPartidos extends Fragment implements
                 partidos.add(partido);
             }
         }
-        initRecyclerView();
+        updateRecyclerView();//update RecyclerView
     }
 
+    /**
+     * Cuando el usuario pincha en un partido
+     * Salta un dialogo con datos adicionales del partido
+     * @param partido seleccionado
+     */
     @Override
     public void onPartidoSeleccionado(Partido partido) {
         ResultDialog dialog = new ResultDialog(partido);
@@ -90,7 +133,10 @@ public class FragmentDetalleEquipoResultadosPartidos extends Fragment implements
         dialog.show(fragmentTransaction,partido.getLocal()+"-"+partido.getVisitor());
     }
 
-    private void initRecyclerView(){
+    /**
+     * Update recycler view.
+     */
+    private void updateRecyclerView(){
         rvListadoDetalle.setAdapter(new JornadaAdapter(partidos, this));
         rvListadoDetalle.setHasFixedSize(true);
         rvListadoDetalle.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));

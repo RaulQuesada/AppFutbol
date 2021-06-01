@@ -2,16 +2,21 @@ package com.raulquesada.appfutbol.rest;
 
 import com.raulquesada.appfutbol.api.IAPIService;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+/**
+ * The type Rest client test.
+ */
+public class RestClientTest {
 
-class RestClientTest {
-
+    /**
+     * Get instance exists ok.
+     */
     @Test
-    void getInstance_Exists_Ok(){
+    public void getInstance_Exists_Ok(){
         IAPIService iapiService = RestClient.getInstance();
         RestClient.reset();
-        assertNotNull(iapiService);
+        Assert.assertNotNull(iapiService);
     }
 }

@@ -7,6 +7,14 @@ import com.raulquesada.appfutbol.models.Equipo;
 
 import java.util.List;
 
+/**
+ * The interface Get equipos favoritos listener.
+ */
 public interface IGetEquiposFavoritosListener {
+    /**
+     * On get equipos favoritos.
+     *
+     * @param task the task
+     */
     void onGetEquiposFavoritos(Task<QuerySnapshot> task);
 }

@@ -5,10 +5,16 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-class JornadaTest {
+/**
+ * The type Jornada test.
+ */
+public class JornadaTest {
 
+    /**
+     * Test jornada.
+     */
     @Test
-    void testJornada(){
+    public void testJornada(){
         ArrayList<Partido> list = new ArrayList<>();
 
         Jornada jornada = new Jornada();

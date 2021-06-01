@@ -20,10 +20,25 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * The type Favoritos adapter.
+ */
 public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.FavoritosViewHolder> {
+    /**
+     * The Equipos.
+     */
     private List<Equipo> equipos;;
+    /**
+     * The Listener.
+     */
     private IEquipoClasificacionListener listener;
 
+    /**
+     * Instantiates a new Favoritos adapter.
+     *
+     * @param equipos  the equipos
+     * @param listener the listener
+     */
     public FavoritosAdapter(List<Equipo> equipos, IEquipoClasificacionListener listener) {
         this.equipos = equipos;
         this.listener=listener;
@@ -46,19 +61,62 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
         return equipos.size();
     }
 
+    /**
+     * The type Favoritos view holder.
+     */
     public static class FavoritosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        /**
+         * The Tv nom equipo favorito.
+         */
         private TextView tvNomEquipoFavorito;
+        /**
+         * The Iv shield equipo favorito.
+         */
         private ImageView ivShieldEquipoFavorito;
+        /**
+         * The Tv partido local favorito.
+         */
         private TextView tvPartidoLocalFavorito;
+        /**
+         * The Tv partido visitor favorito.
+         */
         private TextView tvPartidoVisitorFavorito;
+        /**
+         * The Tv goals local favorito.
+         */
         private TextView tvGoalsLocalFavorito;
+        /**
+         * The Tv goals visitor favorito.
+         */
         private TextView tvGoalsVisitorFavorito;
+        /**
+         * The Tv live minute favorito.
+         */
         private TextView tvLiveMinuteFavorito;
+        /**
+         * The Iv shield local favorito.
+         */
         private ImageView ivShieldLocalFavorito;
+        /**
+         * The Iv shield visitor favorito.
+         */
         private ImageView ivShieldVisitorFavorito;
+        /**
+         * The Listener.
+         */
         private IEquipoClasificacionListener listener;
+        /**
+         * The Equipo.
+         */
         private List<Equipo> equipo;
 
+        /**
+         * Instantiates a new Favoritos view holder.
+         *
+         * @param itemView the item view
+         * @param listener the listener
+         * @param equipo   the equipo
+         */
         public FavoritosViewHolder(@NonNull View itemView, IEquipoClasificacionListener listener, List<Equipo> equipo) {
             super(itemView);
             this.tvNomEquipoFavorito = itemView.findViewById(R.id.tvNomEquipoFavorito);
@@ -75,6 +133,11 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
             itemView.setOnClickListener(this);
         }
 
+        /**
+         * Bind equipo.
+         *
+         * @param equipo the equipo
+         */
         public void bindEquipo(Equipo equipo) {
             tvNomEquipoFavorito.setText(equipo.getTeam());
 
@@ -85,6 +148,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
             tvPartidoLocalFavorito.setText(equipo.getPartidoFavorito().getLocal());
             tvPartidoVisitorFavorito.setText(equipo.getPartidoFavorito().getVisitor());
 
+            //En caso de que el partido sea en directo
             if (equipo.getPartidoFavorito().getLive_minute().equals("")){
                 tvLiveMinuteFavorito.setVisibility(View.GONE);
                 if (equipo.getPartidoFavorito().getLocal_goals().equals("x") || equipo.getPartidoFavorito().getVisitor_goals().equals("x")){
@@ -100,6 +164,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
                         tvPartidoVisitorFavorito.setTypeface(null, Typeface.BOLD);
                     }
                 }
+                //Si no esta en directo
             }else {
                 tvLiveMinuteFavorito.setText(equipo.getPartidoFavorito().getLive_minute()+"'");
                 tvGoalsLocalFavorito.setText(equipo.getPartidoFavorito().getLocal_goals());
@@ -118,6 +183,10 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
                     .into(ivShieldVisitorFavorito);
         }
 
+        /**
+         * Cuando el usaurio pincha en un equipo favorito
+         * @param v vista
+         */
         @Override
         public void onClick(View v) {
             if(listener != null) {

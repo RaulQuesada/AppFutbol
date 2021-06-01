@@ -3,10 +3,16 @@ package com.raulquesada.appfutbol.models;
 import org.junit.Assert;
 import org.junit.Test;
 
-class TipoLeyendaTest {
+/**
+ * The type Tipo leyenda test.
+ */
+public class TipoLeyendaTest {
 
+    /**
+     * Test tipo leyenda.
+     */
     @Test
-    void testTipoLeyenda(){
+    public void testTipoLeyenda(){
         final int POS = 1;
         final String TITLE = "title";
         final String CLASS_COLOR = "class_color";

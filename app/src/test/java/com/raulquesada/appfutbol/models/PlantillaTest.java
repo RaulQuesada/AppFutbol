@@ -5,10 +5,16 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-class PlantillaTest {
+/**
+ * The type Plantilla test.
+ */
+public class PlantillaTest {
 
+    /**
+     * Test plantilla.
+     */
     @Test
-    void testPlantilla(){
+    public void testPlantilla(){
         ArrayList<Jugador> list = new ArrayList<>();
 
         Plantilla plantilla = new Plantilla();

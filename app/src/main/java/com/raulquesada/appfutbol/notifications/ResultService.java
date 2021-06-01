@@ -19,12 +19,30 @@ import androidx.core.app.NotificationCompat;
 import com.raulquesada.appfutbol.activities.MainActivity;
 import com.raulquesada.appfutbol.R;
 
+/**
+ * The type Result service.
+ */
 public class ResultService extends IntentService  {
 
+    /**
+     * The Notification manager.
+     */
     private NotificationManager notificationManager;
+    /**
+     * The Pending intent.
+     */
     private PendingIntent pendingIntent;
+    /**
+     * The constant NOTIFICATION_ID.
+     */
     private static int NOTIFICATION_ID = 1;
+    /**
+     * The Notification.
+     */
     private Notification notification;
+    /**
+     * The Context.
+     */
     private Context context;
 
     /**

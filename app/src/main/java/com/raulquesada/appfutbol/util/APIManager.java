@@ -24,18 +24,50 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class APIManager {
+    /**
+     * The Iapi service.
+     */
     private IAPIService iapiService;
 
+    /**
+     * The Get liga listener.
+     */
     private IGetLigaListener getLigaListener;
+    /**
+     * The Get liga para partido listener.
+     */
     private IGetLigaParaPartidoListener getLigaParaPartidoListener;
+    /**
+     * The Get equipos en clasificacion listener.
+     */
     private IGetEquiposEnClasificacionListener getEquiposEnClasificacionListener;
+    /**
+     * The Get partidos listener.
+     */
     private IGetPartidosListener getPartidosListener;
+    /**
+     * The Get partidos para un partido listener.
+     */
     private IGetPartidosParaUnPartidoListener getPartidosParaUnPartidoListener;
+    /**
+     * The Get plantilla listener.
+     */
     private IGetPlantillaListener getPlantillaListener;
+    /**
+     * The Get equipos en liga.
+     */
     private IGetEquiposEnLiga getEquiposEnLiga;
 
+    /**
+     * The Context.
+     */
     private Context context;
 
+    /**
+     * Instantiates a new Api manager.
+     *
+     * @param context the context
+     */
     public APIManager(Context context){
         this.context = context;
         iapiService = RestClient.getInstance();
@@ -152,30 +184,65 @@ public class APIManager {
         });
     }
 
+    /**
+     * Sets get plantilla listener.
+     *
+     * @param getPlantillaListener the get plantilla listener
+     */
     public void setGetPlantillaListener(IGetPlantillaListener getPlantillaListener) {
         this.getPlantillaListener = getPlantillaListener;
     }
 
+    /**
+     * Sets get equipos en clasificacion listener.
+     *
+     * @param getEquiposEnClasificacionListener the get equipos en clasificacion listener
+     */
     public void setGetEquiposEnClasificacionListener(IGetEquiposEnClasificacionListener getEquiposEnClasificacionListener) {
         this.getEquiposEnClasificacionListener = getEquiposEnClasificacionListener;
     }
 
+    /**
+     * Sets get partidos.
+     *
+     * @param getPartidos the get partidos
+     */
     public void setGetPartidos(IGetPartidosListener getPartidos) {
         this.getPartidosListener = getPartidos;
     }
 
+    /**
+     * Sets get liga listener.
+     *
+     * @param getLigaListener the get liga listener
+     */
     public void setGetLigaListener(IGetLigaListener getLigaListener) {
         this.getLigaListener = getLigaListener;
     }
 
+    /**
+     * Sets get equipos en liga.
+     *
+     * @param getEquiposEnLiga the get equipos en liga
+     */
     public void setGetEquiposEnLiga(IGetEquiposEnLiga getEquiposEnLiga) {
         this.getEquiposEnLiga = getEquiposEnLiga;
     }
 
+    /**
+     * Sets get liga para partido listener.
+     *
+     * @param getLigaParaPartidoListener the get liga para partido listener
+     */
     public void setGetLigaParaPartidoListener(IGetLigaParaPartidoListener getLigaParaPartidoListener) {
         this.getLigaParaPartidoListener = getLigaParaPartidoListener;
     }
 
+    /**
+     * Sets get partidos para un partido listener.
+     *
+     * @param getPartidosParaUnPartidoListener the get partidos para un partido listener
+     */
     public void setGetPartidosParaUnPartidoListener(IGetPartidosParaUnPartidoListener getPartidosParaUnPartidoListener) {
         this.getPartidosParaUnPartidoListener = getPartidosParaUnPartidoListener;
     }

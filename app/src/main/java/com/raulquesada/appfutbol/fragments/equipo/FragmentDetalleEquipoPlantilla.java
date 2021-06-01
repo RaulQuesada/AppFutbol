@@ -19,15 +19,35 @@ import com.raulquesada.appfutbol.models.Liga;
 import com.raulquesada.appfutbol.models.Plantilla;
 import com.raulquesada.appfutbol.util.APIManager;
 
+/**
+ * The type Fragment detalle equipo plantilla.
+ */
 public class FragmentDetalleEquipoPlantilla extends Fragment implements IGetPlantillaListener, IGetEquiposEnLiga {
+    /**
+     * The Rv listado detalle.
+     */
     private RecyclerView rvListadoDetalle;
+    /**
+     * The Api manager.
+     */
     private APIManager apiManager;
+    /**
+     * The Equipo.
+     */
     private Equipo equipo;
 
+    /**
+     * Instantiates a new Fragment detalle equipo plantilla.
+     */
     public FragmentDetalleEquipoPlantilla(){
 
     }
 
+    /**
+     * Instantiates a new Fragment detalle equipo plantilla.
+     *
+     * @param equipo the equipo
+     */
     public FragmentDetalleEquipoPlantilla(Equipo equipo){
         this.equipo = equipo;
         apiManager = new APIManager(getContext());
@@ -45,9 +65,15 @@ public class FragmentDetalleEquipoPlantilla extends Fragment implements IGetPlan
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //Inicializo RecyclerView
         rvListadoDetalle = getView().findViewById(R.id.rvListadoDetalle);
     }
 
+    /**
+     * Cuando recibo la plantilla del equipo desde la API
+     * Set adapter al RecyclerView de la plantilla
+     * @param plantilla del equipo
+     */
     @Override
     public void OnGetPlantilla(Plantilla plantilla) {
         rvListadoDetalle.setAdapter(new PlantillaAdapter(plantilla.getJugadores()));
@@ -55,10 +81,14 @@ public class FragmentDetalleEquipoPlantilla extends Fragment implements IGetPlan
         rvListadoDetalle.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     }
 
+    /**
+     * Cuando recibo los equipos de una liga
+     * @param liga con los equipos que la componen
+     */
     @Override
     public void OnGetEquipos(Liga liga) {
         boolean encontrado = false;
-        final int limit = 30;
+        final int limit = 30;//limite de equipos que puede llegar a haber en una liga
         int i = 0;
         while (!encontrado && i<limit){
             if (Integer.parseInt(equipo.getId())==Integer.parseInt(liga.getEquiposEnLiga().get(i).getId())){

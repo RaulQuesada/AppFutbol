@@ -6,10 +6,16 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class LigaTest {
+/**
+ * The type Liga test.
+ */
+public class LigaTest {
 
+    /**
+     * Test liga.
+     */
     @Test
-    void testLiga(){
+    public void testLiga(){
         List<EquipoEnLiga> equiposEnLiga = new ArrayList<>();
 
         Liga liga = new Liga();

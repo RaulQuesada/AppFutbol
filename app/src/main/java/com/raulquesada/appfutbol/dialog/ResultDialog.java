@@ -17,18 +17,56 @@ import com.raulquesada.appfutbol.R;
 import com.raulquesada.appfutbol.models.Partido;
 import com.squareup.picasso.Picasso;
 
+/**
+ * The type Result dialog.
+ */
 public class ResultDialog extends DialogFragment {
+    /**
+     * The Iv dialog competicion result.
+     */
     private ImageView ivDialogCompeticionResult;
+    /**
+     * The Iv dialog result local.
+     */
     private ImageView ivDialogResultLocal;
+    /**
+     * The Iv dialog result visitor.
+     */
     private ImageView ivDialogResultVisitor;
+    /**
+     * The Iv dialog channel.
+     */
     private ImageView ivDialogChannel;
+    /**
+     * The Tv dialog cometicion name.
+     */
     private TextView tvDialogCometicionName;
+    /**
+     * The Tv dialog jornada.
+     */
     private TextView tvDialogJornada;
+    /**
+     * The Tv dialog fecha.
+     */
     private TextView tvDialogFecha;
+    /**
+     * The Tv dialog result.
+     */
     private TextView tvDialogResult;
+    /**
+     * The Tv dialog channel.
+     */
     private TextView tvDialogChannel;
+    /**
+     * The Partido.
+     */
     private Partido partido;
 
+    /**
+     * Instantiates a new Result dialog.
+     *
+     * @param partido the partido
+     */
     public ResultDialog(Partido partido) {
         this.partido = partido;
     }
@@ -73,8 +111,10 @@ public class ResultDialog extends DialogFragment {
         }
         tvDialogCometicionName.setText(partido.getCompetition_name());
         tvDialogJornada.setText("Jornada "+partido.getJornada()+ " - Estadio: "+Lib.getStadium(Integer.parseInt(partido.getIdLocal())));
+        //Si el partido esta en directo
         if (partido.getLive_minute().equals("")){
             tvDialogFecha.setText(Lib.changeFormatDate(partido.getDate())+" - "+partido.getHour()+":"+partido.getMinute());
+        //Si no esta en directo
         }else {
             tvDialogFecha.setText(partido.getLive_minute()+"'");
             tvDialogFecha.setTextColor(Color.parseColor("#FF0000"));
@@ -90,9 +130,11 @@ public class ResultDialog extends DialogFragment {
                 .load(partido.getVisitor_shield())
                 .into(ivDialogResultVisitor);
 
+        //Si no hay canales de retransmisión
         if (partido.getCanales().length==0){
             ivDialogChannel.setVisibility(View.GONE);
             tvDialogChannel.setVisibility(View.GONE);
+        //Si si los hay
         }else {
             tvDialogChannel.setText(partido.getCanales()[0].getName());
 

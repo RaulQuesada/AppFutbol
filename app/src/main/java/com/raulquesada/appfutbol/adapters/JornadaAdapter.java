@@ -19,10 +19,25 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * The type Jornada adapter.
+ */
 public class JornadaAdapter extends RecyclerView.Adapter<JornadaAdapter.JornadaViewHolder> {
+    /**
+     * The Partidos.
+     */
     private List<Partido> partidos;
+    /**
+     * The Listener.
+     */
     private IPartidoJornadaListener listener;
 
+    /**
+     * Instantiates a new Jornada adapter.
+     *
+     * @param partidos the partidos
+     * @param listener the listener
+     */
     public JornadaAdapter(List<Partido> partidos, IPartidoJornadaListener listener) {
         this.partidos = partidos;
         this.listener=listener;
@@ -45,17 +60,54 @@ public class JornadaAdapter extends RecyclerView.Adapter<JornadaAdapter.JornadaV
         return partidos.size();
     }
 
+    /**
+     * The type Jornada view holder.
+     */
     public static class JornadaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        /**
+         * The Tv partido local.
+         */
         private TextView tvPartidoLocal;
+        /**
+         * The Tv partido visitor.
+         */
         private TextView tvPartidoVisitor;
+        /**
+         * The Tv goals local.
+         */
         private TextView tvGoalsLocal;
+        /**
+         * The Tv goals visitor.
+         */
         private TextView tvGoalsVisitor;
+        /**
+         * The Tv live minute.
+         */
         private TextView tvLiveMinute;
+        /**
+         * The Iv shield local.
+         */
         private ImageView ivShieldLocal;
+        /**
+         * The Iv shield visitor.
+         */
         private ImageView ivShieldVisitor;
+        /**
+         * The Listener.
+         */
         private IPartidoJornadaListener listener;
+        /**
+         * The Partidos.
+         */
         private List<Partido> partidos;
 
+        /**
+         * Instantiates a new Jornada view holder.
+         *
+         * @param itemView the item view
+         * @param listener the listener
+         * @param partidos the partidos
+         */
         public JornadaViewHolder(@NonNull View itemView, IPartidoJornadaListener listener, List<Partido> partidos) {
             super(itemView);
             this.tvPartidoLocal = itemView.findViewById(R.id.tvPartidoLocal);
@@ -70,10 +122,16 @@ public class JornadaAdapter extends RecyclerView.Adapter<JornadaAdapter.JornadaV
             itemView.setOnClickListener(this);
         }
 
+        /**
+         * Bind partido.
+         *
+         * @param partido the partido
+         */
         public void bindPartido(Partido partido) {
             tvPartidoLocal.setText(partido.getLocal());
             tvPartidoVisitor.setText(partido.getVisitor());
 
+            //Si el partido esta en directo
             if (partido.getLive_minute().equals("")){
                 tvLiveMinute.setVisibility(View.GONE);
                 if (partido.getLocal_goals().equals("x") || partido.getVisitor_goals().equals("x")){
@@ -89,6 +147,7 @@ public class JornadaAdapter extends RecyclerView.Adapter<JornadaAdapter.JornadaV
                         tvPartidoVisitor.setTypeface(null, Typeface.BOLD);
                     }
                 }
+                //Si no esta en directo
             }else {
                 tvLiveMinute.setText(partido.getLive_minute()+"'");
                 tvGoalsLocal.setText(partido.getLocal_goals());
@@ -107,6 +166,10 @@ public class JornadaAdapter extends RecyclerView.Adapter<JornadaAdapter.JornadaV
                     .into(ivShieldVisitor);
         }
 
+        /**
+         * Cuando el usaurio pincha en un partido
+         * @param v vista
+         */
         @Override
         public void onClick(View v) {
             if(listener != null) {

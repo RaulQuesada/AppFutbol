@@ -35,16 +35,37 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FragmentClasificacion extends Fragment implements IGetEquiposEnClasificacionListener, IEquipoClasificacionListener {
-    private final static String[] TEMPORADAS = {"2020-2021","2019-2020","2018-2019","2017-2018"};
-    private final static int CURRENT_SEASON = 2021;
+    private final static String[] TEMPORADAS = {"2020-2021","2019-2020","2018-2019","2017-2018"};//Temporadas disponibles
+    private final static int CURRENT_SEASON = 2021;//Temporada actual
 
-    private int selectedSeason;
+    private int selectedSeason;//Temporada seleccionada
+    /**
+     * The Iv competicion clasificacion.
+     */
     private ImageView ivCompeticionClasificacion;
+    /**
+     * The Tv competicion name clasificacion.
+     */
     private TextView tvCompeticionNameClasificacion;
+    /**
+     * The Spin temporada.
+     */
     private Spinner spinTemporada;
+    /**
+     * The Rv listado.
+     */
     private RecyclerView rvListado;
+    /**
+     * The C leyenda primera division.
+     */
     private ConstraintLayout cLeyendaPrimeraDivision;
+    /**
+     * The C leyenda segunda division.
+     */
     private ConstraintLayout cLeyendaSegundaDivision;
+    /**
+     * The Api manager.
+     */
     private APIManager apiManager;
     private SharedPreferences myPrefs;//Mis preferencias
 
@@ -57,6 +78,9 @@ public class FragmentClasificacion extends Fragment implements IGetEquiposEnClas
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //Inicializo variables y componentes
+
         selectedSeason = CURRENT_SEASON;
         myPrefs = this.getActivity().getSharedPreferences("Admin", Context.MODE_PRIVATE);
         rvListado = getView().findViewById(R.id.rvListado);
@@ -70,6 +94,7 @@ public class FragmentClasificacion extends Fragment implements IGetEquiposEnClas
         ivCompeticionClasificacion = getView().findViewById(R.id.ivCompeticionClasificacion);
         tvCompeticionNameClasificacion = getView().findViewById(R.id.tvCompeticionNameClasificacion);
 
+        //Datos de la liga seleccionada
         switch (myPrefs.getInt("division",1)){
             case 1:
                 ivCompeticionClasificacion.setImageDrawable(getResources().getDrawable(R.drawable.laliga));
@@ -83,10 +108,12 @@ public class FragmentClasificacion extends Fragment implements IGetEquiposEnClas
                 break;
         }
 
+        //API Manager
         apiManager = new APIManager(getContext());
         apiManager.setGetEquiposEnClasificacionListener(this);
         apiManager.getEquiposEnClasificacion(myPrefs.getInt("division",1),CURRENT_SEASON);
 
+        //Clasificación según el item que haya seleccionado el usuario
         spinTemporada.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -114,6 +141,11 @@ public class FragmentClasificacion extends Fragment implements IGetEquiposEnClas
         });
     }
 
+    /**
+     * Listener cuando recibo los equipos de la API
+     * Set adapter al RecyclerView con la clasificación
+     * @param equipoEnClasificacions equipos de la clasificación
+     */
     @Override
     public void OnGetEquiposEnClasificacion(Tabla equipoEnClasificacions) {
         rvListado.setAdapter(new ClasificacionAdapter(equipoEnClasificacions,this));
@@ -121,18 +153,28 @@ public class FragmentClasificacion extends Fragment implements IGetEquiposEnClas
         rvListado.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     }
 
+    /**
+     * Cuando el usuario pincha en un equipo
+     * Lo redirigo a la activity del equipo
+     * @param eEC equipo seleccionado
+     */
     @Override
     public void onEquipoSeleccionado(Equipo eEC) {
-        if (selectedSeason != CURRENT_SEASON){
+        if (selectedSeason != CURRENT_SEASON){//Si no es la temporada actual, no hay información
             Toast.makeText(getContext(),"Para ver información de equipos debes seleccionar la temporada actual",Toast.LENGTH_LONG).show();
         }else {
             eEC.setDivision(myPrefs.getInt("division",1));
             Intent i = new Intent(getContext(), EquipoActivity.class);
             i.putExtra("Equipo",eEC);
-            i.putExtra(MainActivity.EXTRA_MAIN,1);
+            i.putExtra(MainActivity.EXTRA_MAIN,1);//extra para decir que viene del fragment clasificación
             startActivity(i);//Carga activity equipo
         }
     }
+
+    /**
+     * set adapter del Spinner
+     * @param temporadas disponibles
+     */
     private void setAdapterSpinnerTemporada(List<String> temporadas){
         ArrayAdapter<String> adaptadorTemporadas = new ArrayAdapter<>(getActivity(), R.layout.item_spinner, temporadas);
         spinTemporada.setAdapter(adaptadorTemporadas);

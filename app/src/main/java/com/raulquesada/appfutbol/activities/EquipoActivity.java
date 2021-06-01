@@ -29,23 +29,25 @@ import com.raulquesada.appfutbol.listeners.button.IButtonResultadosListener;
 import com.raulquesada.appfutbol.models.Equipo;
 
 public class EquipoActivity extends AppCompatActivity implements IButtonPlantillaListener, IButtonPartidosListener, IButtonResultadosListener {
-    private FragmentEquipo frgEquipo;
-    private Fragment f = null;
-    private Toolbar toolbar;
-    private MenuItem favouriteTeam;
-    private FirebaseFirestore db;
-    private CollectionReference reference;
-    private Equipo eQC;
-    private boolean favorito;
+    private FragmentEquipo frgEquipo;// Fragment estáico del equipo
+    private Fragment f = null;//Fragment donde se muestra la plantilla, resultados o partidos
+    private Toolbar toolbar;//toolbar de la activity equipo
+    private MenuItem favouriteTeam;//item para añadir/eliminar el equipo a Favoritos
+    private FirebaseFirestore db;//base de datos Firebase
+    private CollectionReference reference;//referencia a la base dedatos
+    private Equipo eQC;//equipo
+    private boolean favorito;//Si el equipo es favorto o no
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipo);
 
+        //Obtenemos el equipo
         Intent i = getIntent();
         eQC = (Equipo)i.getSerializableExtra("Equipo");
 
+        //set toolbar
         toolbar = findViewById(R.id.toolbarEquipo);
         setSupportActionBar(toolbar);
 
@@ -55,8 +57,10 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
             getSupportActionBar().setTitle("Info Equipo");
         }
 
+        //instancia de la base de datos
         db = FirebaseFirestore.getInstance();
         reference = db.collection(MainActivity.TAG);
+        //obtengo si el equipo es favorito o no
         reference.whereEqualTo("id",eQC.getId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -75,11 +79,15 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
         });
 
         frgEquipo = (FragmentEquipo)getSupportFragmentManager().findFragmentById(R.id.FrgEquipo);
+
+        //listeners
         frgEquipo.setButtonPlantillaListener(this);
         frgEquipo.setButtonPartidosListener(this);
         frgEquipo.setButtonResultadosListener(this);
 
         frgEquipo.setEquipo(eQC);
+
+        //Llamo a los métodos inicialización del fagment
         frgEquipo.init();
         f = new FragmentDetalleEquipoPlantilla(eQC);
         getSupportFragmentManager()
@@ -88,6 +96,9 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
                 .commit();
     }
 
+    /**
+     * Si el usuario pincha en Plantilla, el fragment cambia al de plantilla
+     */
     @Override
     public void OnPlantillaButtonPressed() {
         f = new FragmentDetalleEquipoPlantilla(eQC);
@@ -97,6 +108,9 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
                 .commit();
     }
 
+    /**
+     * Si el usuario pincha en Partidos, el fragment cambia al de partidos
+     */
     @Override
     public void OnPartidosButtonPressed() {
         f = new FragmentDetalleEquipoResultadosPartidos(eQC, false);
@@ -106,6 +120,9 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
                 .commit();
     }
 
+    /**
+     * Si el usuario pincha en Resultados, el fragment cambia al de resultados
+     */
     @Override
     public void OnResultadosButtonPressed() {
         f = new FragmentDetalleEquipoResultadosPartidos(eQC, true);
@@ -115,6 +132,11 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
                 .commit();
     }
 
+    /**
+     * Inflo el menu
+     * @param menu de la toolbar
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_equipo, menu);
@@ -122,19 +144,26 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
         return true;
     }
 
+    /**
+     * Cuando el usuario pincha en un elemento del menu
+     * @param item del menu
+     * @return super.onOptionsItemSelected(item)
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            //Item para volver atrás
             case android.R.id.home:
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 int extra = getIntent().getIntExtra(MainActivity.EXTRA_MAIN,1);
-                i.putExtra(MainActivity.EXTRA_MAIN,extra);
+                i.putExtra(MainActivity.EXTRA_MAIN,extra);//Obtengo el fragment al que hay que volver
                 i.putExtra(MainActivity.EXTRA_DIVISION,eQC.getDivision());
                 startActivity(i);
                 break;
 
+                //Item añadir/eliminar equipos favoritos
             case R.id.action_favourite:
-                if (favorito){
+                if (favorito){//En caso de que ya este en favoritos, se elimina
                     reference.document(eQC.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -147,7 +176,7 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
                         }
                     });
                     favorito = false;
-                }else {
+                }else {//En caso de que no este en favoritos, se añade
                     reference.document(eQC.getId()).set(eQC).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -161,11 +190,15 @@ public class EquipoActivity extends AppCompatActivity implements IButtonPlantill
                     });
                     favorito = true;
                 }
-                setFavouriteIcon();
+                setFavouriteIcon();//Cambio el icono
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * Método encaragado de cambiar el icono en caso de que el equipo sea favorito o no
+     */
     private void setFavouriteIcon(){
         if (favorito){
             favouriteTeam.setIcon(android.R.drawable.btn_star_big_on);

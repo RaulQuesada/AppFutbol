@@ -3,10 +3,16 @@ package com.raulquesada.appfutbol.models;
 import org.junit.Assert;
 import org.junit.Test;
 
-class CanalTest {
+/**
+ * The type Canal test.
+ */
+public class CanalTest {
 
+    /**
+     * Test canal.
+     */
     @Test
-    void testCanal(){
+    public void testCanal(){
         final String SET_ID = "2";
         final String SET_NAME = "SETNAME";
         final String SET_URL = "SETURL";

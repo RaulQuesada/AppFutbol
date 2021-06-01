@@ -3,10 +3,16 @@ package com.raulquesada.appfutbol.models;
 import org.junit.Assert;
 import org.junit.Test;
 
-class EquipoTest {
+/**
+ * The type Equipo test.
+ */
+public class EquipoTest {
 
+    /**
+     * Test equipo.
+     */
     @Test
-    void testEquipo(){
+    public void testEquipo(){
         final String ID = "id";
         final String TEAM = "team";
         final String MARK = "mark";

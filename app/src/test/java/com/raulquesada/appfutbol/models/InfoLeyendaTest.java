@@ -5,10 +5,16 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-class InfoLeyendaTest {
+/**
+ * The type Info leyenda test.
+ */
+public class InfoLeyendaTest {
 
+    /**
+     * Test info leyenda.
+     */
     @Test
-    void testInfoLeyenda(){
+    public void testInfoLeyenda(){
         final int POS = 1;
         ArrayList<TipoLeyenda> list = new ArrayList<>();
 

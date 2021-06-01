@@ -43,6 +43,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.raulquesada.appfutbol.R;
 import com.raulquesada.appfutbol.fragments.clasificacion.FragmentClasificacion;
 import com.raulquesada.appfutbol.fragments.directo.FragmentDirecto;
+import com.raulquesada.appfutbol.fragments.equipo.FragmentEquipo;
 import com.raulquesada.appfutbol.fragments.favorito.FragmentFavorito;
 import com.raulquesada.appfutbol.fragments.jornada.FragmentJornada;
 import com.raulquesada.appfutbol.listeners.api.IGetEquiposFavoritosListener;
@@ -53,28 +54,28 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IGetEquiposFavoritosListener {
-    public static final String EXTRA_MAIN = "extramain";
-    public static final String EXTRA_DIVISION = "extradivision";
+    public static final String EXTRA_MAIN = "extramain";//extra para saber que fragment inicializar
+    public static final String EXTRA_DIVISION = "extradivision";//extra para saber que liga esta seleccionada
     public static final String TAG ="favouriteTeams";
-    public static final int PRIMERA_DIVISION = 1;
-    public static final int SEGUNDA_DIVISION = 2;
+    public static final int PRIMERA_DIVISION = 1;//final primera division
+    public static final int SEGUNDA_DIVISION = 2;//final segunda division
 
-    private FirebaseFirestore db;
-    private CollectionReference reference;
-    private Toolbar toolbar;
-    private NavigationView navigationView;
-    private DrawerLayout drawer;
-    private Button bLogin;
-    private BottomNavigationView bottomNavigationView;
-    private View navView;
+    private FirebaseFirestore db;//base de datos Firebase
+    private CollectionReference reference;//referencia a la base dedatos
+    private Toolbar toolbar;//toolbar de la activity MainActivity
+    private NavigationView navigationView;//NavigationView, menu lateral
+    private DrawerLayout drawer;//Layout menú lateral
+    private Button bLogin;//Botón para iniciar sesión
+    private BottomNavigationView bottomNavigationView;//BottomNavigationView, menu inferior
+    private View navView;//Vista del NavigationView
     private SharedPreferences myPrefs;//Mis preferencias
     private SharedPreferences prefs; //Preferencias de la preference screen
-    private SharedPreferences.Editor editor;
+    private SharedPreferences.Editor editor;//editor de preferencias
     private ArrayList<Equipo> listaEquipos = new ArrayList<>();
-    private GoogleSignInClient mGoogleSignInCliente;
-    private FirebaseAuth mAuth;
-    private NotificationsManager notificationsManager;
-    private Bundle bundle;
+    private GoogleSignInClient mGoogleSignInCliente;//Sign in Google
+    private FirebaseAuth mAuth;//FireBase Auth
+    private NotificationsManager notificationsManager;//notification manager
+    private Bundle bundle;//savedInstanceState
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,21 +83,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         bundle = savedInstanceState;
 
+        //inicializo toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //inicializo menu inferior
         bottomNavigationView = findViewById(R.id.bottomMenu);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
+        //inicializar drawer
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //inicializar menu lateral
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Inicializo vista y sus componentes en el menu lateral
         navView = navigationView.getHeaderView(0);
         bLogin = navView.findViewById(R.id.bLogin);
         ImageView ivSesion = navView.findViewById(R.id.ivFotoUser);
@@ -107,16 +113,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .requestEmail()
                 .build();
 
+        //Obtengo cliente Google
         mGoogleSignInCliente = GoogleSignIn.getClient(this,gso);
 
+        //Inicializo base de datos FireBase
         db = FirebaseFirestore.getInstance();
         reference = db.collection(TAG);
 
+        //preferencias
         myPrefs = getSharedPreferences("Admin", Context.MODE_PRIVATE);
         editor = myPrefs.edit();
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        //Selecciono por defecto la liga que hay en las preferencias
         switch (prefs.getString("opcionAbrirAppLiga","LaLiga Santander")){
             case "LaLiga Santander":
                 editor.putInt("division", PRIMERA_DIVISION).apply();
@@ -130,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
+        //Obtengo los equipos favoritos del usuario
         reference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -145,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        //Cuando el usuario pulsa el boton inicia/cierra sesión
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,29 +168,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
+    /**
+     * Cuando el usuario pulsa uno de los items del menu inferior
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = item -> {
         // By using switch we can easily get
         // the selected fragment
         // by using there id.
         Fragment selectedFragment = null;
         switch (item.getItemId()) {
-            case R.id.fragmentClasificacion:
+            case R.id.fragmentClasificacion://Selecciona Clasificación
                 selectedFragment = new FragmentClasificacion();
                 break;
-            case R.id.fragmentJornada:
+            case R.id.fragmentJornada://Selecciona Jornada
                 selectedFragment = new FragmentJornada();
                 break;
-            case R.id.fragmentDirecto:
+            case R.id.fragmentDirecto://Selecciona Directo
                 selectedFragment = new FragmentDirecto();
                 break;
-            case R.id.fragmentFavorito:
+            case R.id.fragmentFavorito://Selecciona Favorito
                 selectedFragment = new FragmentFavorito(listaEquipos,myPrefs.getBoolean("log",false));
                 break;
-            case R.id.fragmentPreference:
+            case R.id.fragmentPreference://Selecciona Configuración
                 Intent i = new Intent(MainActivity.this, OpcionesActivity.class);
                 startActivity(i);
                 break;
         }
+        //Set title de la activity, edpendiendo de la liga seleccioanda
         if (myPrefs.getInt("division",1)==1){
             setTitle("LaLiga Santander");
         }else {
@@ -195,18 +212,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     };
     @Override
+    /**
+     * Cuando el usuario pincha en algunas de las ligas del menu laterla
+     */
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment f;
         // Se ha hecho click en algún item del NavigationView
         int id = item.getItemId();
 
         if (id == R.id.primeraDivision) {
-            editor.putInt("division", PRIMERA_DIVISION).apply();
+            editor.putInt("division", PRIMERA_DIVISION).apply();//pongo en las preferencias LaLiga Santander
             f = new FragmentClasificacion();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("LaLiga Santander");
         } else if (id == R.id.segundaDivision) {
-            editor.putInt("division", SEGUNDA_DIVISION).apply();
+            editor.putInt("division", SEGUNDA_DIVISION).apply();//pongo en las preferencias LaLiga SmartBank
             f = new FragmentClasificacion();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("LaLiga SmartBank");
@@ -215,6 +235,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView.setSelectedItemId(R.id.fragmentClasificacion);
         return true;
     }
+
+    /**
+     * Iniciar Sesión
+     */
     private void signIn(){
         Intent signInIntent = mGoogleSignInCliente.getSignInIntent();
         startActivityForResult(signInIntent, 1);
@@ -222,6 +246,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.putBoolean("log", true).apply();
     }
 
+    /**
+     * Cerrar sesión
+     */
     private void signOut(){
         FirebaseAuth.getInstance().signOut();
         TextView tvUser = navView.findViewById(R.id.tvNameUser);
@@ -244,6 +271,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    /**
+     * Handle cuenta inicia sesión
+     * @param task resultado handle
+     */
     private void handleSignInResult(Task<GoogleSignInAccount> task){
         try {
             GoogleSignInAccount acc = task.getResult(ApiException.class);
@@ -254,6 +285,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    /**
+     * Autenticación ed Google
+     * @param acc cuenta
+     */
     private void firebaseGoogleAuth(GoogleSignInAccount acc){
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acc.getIdToken(), null);
         mAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -268,6 +303,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
+    /**
+     * Actualizar usuario
+     * @param user usuario firebase
+     */
     private void updateUser(FirebaseUser user){
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if (account!=null && user!=null){
@@ -290,6 +330,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         updateUser(currentUser);
     }
 
+    /**
+     * listener cuando recibe los equipos favoritos
+     * @param task
+     */
     @Override
     public void onGetEquiposFavoritos(Task<QuerySnapshot> task) {
         for (QueryDocumentSnapshot document : task.getResult()) {
@@ -299,6 +343,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         notificationsManager.init();
         initFragment();
     }
+
+    /**
+     * Inicializar fragment
+     */
     private void initFragment(){
         int extra;
         int division;

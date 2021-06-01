@@ -7,6 +7,9 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.raulquesada.appfutbol.R;
 
+/**
+ * The type Config fragment.
+ */
 public class ConfigFragment extends PreferenceFragmentCompat {
 
     @Override

@@ -7,8 +7,17 @@ import android.net.Uri;
 
 import androidx.core.content.ContextCompat;
 
+/**
+ * The type Alarm receiver.
+ */
 public class AlarmReceiver extends BroadcastReceiver {
+    /**
+     * The constant EXTRA_RECEIVER_TITLE.
+     */
     public static final String EXTRA_RECEIVER_TITLE = "titlereceiver";
+    /**
+     * The constant EXTRA_RECEIVER_MESSAGE.
+     */
     public static final String EXTRA_RECEIVER_MESSAGE = "messagereceiver";
 
     @Override

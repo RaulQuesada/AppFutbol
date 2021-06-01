@@ -5,10 +5,16 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-class TablaTest {
+/**
+ * The type Tabla test.
+ */
+public class TablaTest {
 
+    /**
+     * Test tabla.
+     */
     @Test
-    void testTabla(){
+    public void testTabla(){
         ArrayList<InfoLeyenda> listInfo = new ArrayList<>();
         ArrayList<Equipo> listEquipo = new ArrayList<>();
 

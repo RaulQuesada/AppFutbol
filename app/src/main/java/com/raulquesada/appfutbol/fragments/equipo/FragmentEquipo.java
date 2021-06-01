@@ -18,21 +18,66 @@ import com.raulquesada.appfutbol.models.Equipo;
 import com.raulquesada.appfutbol.util.Lib;
 import com.squareup.picasso.Picasso;
 
+/**
+ * The type Fragment equipo.
+ */
 public class FragmentEquipo extends Fragment implements View.OnClickListener {
 
+    /**
+     * The Equipo.
+     */
     private Equipo equipo;
+    /**
+     * The Iv flag equipo.
+     */
     private ImageView ivFlagEquipo;
+    /**
+     * The Iv shield equipo.
+     */
     private ImageView ivShieldEquipo;
+    /**
+     * The Tv nom equipo.
+     */
     private TextView tvNomEquipo;
+    /**
+     * The Tv estadio.
+     */
     private TextView tvEstadio;
+    /**
+     * The Tv competicion equipo.
+     */
     private TextView tvCompeticionEquipo;
+    /**
+     * The Tv posicion equipo.
+     */
     private TextView tvPosicionEquipo;
+    /**
+     * The Tv forma.
+     */
     private TextView [] tvForma;
+    /**
+     * The B plantilla equipo.
+     */
     private TextView bPlantillaEquipo;
+    /**
+     * The B resultados equipo.
+     */
     private TextView bResultadosEquipo;
+    /**
+     * The B partidos equipo.
+     */
     private TextView bPartidosEquipo;
+    /**
+     * The Button plantilla listener.
+     */
     private IButtonPlantillaListener buttonPlantillaListener;
+    /**
+     * The Button partidos listener.
+     */
     private IButtonPartidosListener buttonPartidosListener;
+    /**
+     * The Button resultados listener.
+     */
     private IButtonResultadosListener buttonResultadosListener;
 
     @Nullable
@@ -41,10 +86,20 @@ public class FragmentEquipo extends Fragment implements View.OnClickListener {
         return inflater.inflate(R.layout.fragment_equipo, container, false);
     }
 
+    /**
+     * Set equipo.
+     *
+     * @param equipo the equipo
+     */
     public void setEquipo(Equipo equipo){
         this.equipo = equipo;
     }
+
+    /**
+     * Init variables y componentes según el equipo
+     */
     public void init(){
+
         ivFlagEquipo = getView().findViewById(R.id.ivFlagEquipo);
         ivShieldEquipo = getView().findViewById(R.id.ivShieldEquipo);
         tvCompeticionEquipo = getView().findViewById(R.id.tvCompeticionEquipo);
@@ -103,18 +158,40 @@ public class FragmentEquipo extends Fragment implements View.OnClickListener {
         }
     }
 
+    /**
+     * Sets button plantilla listener.
+     *
+     * @param buttonPlantillaListener the button plantilla listener
+     */
     public void setButtonPlantillaListener(IButtonPlantillaListener buttonPlantillaListener) {
         this.buttonPlantillaListener = buttonPlantillaListener;
     }
 
+    /**
+     * Sets button partidos listener.
+     *
+     * @param buttonPartidosListener the button partidos listener
+     */
     public void setButtonPartidosListener(IButtonPartidosListener buttonPartidosListener) {
         this.buttonPartidosListener = buttonPartidosListener;
     }
 
+    /**
+     * Sets button resultados listener.
+     *
+     * @param buttonResultadosListener the button resultados listener
+     */
     public void setButtonResultadosListener(IButtonResultadosListener buttonResultadosListener) {
         this.buttonResultadosListener = buttonResultadosListener;
     }
 
+    /**
+     * Set active button.
+     * Para cuando el usuario pincha una opción del menú, deshabilitar esa opción y habilitar las demás
+     *
+     * @param activeButton the active button
+     * @param resetButton  the reset button
+     */
     private void setActiveButton(TextView activeButton, TextView[] resetButton){
         activeButton.setTextColor(getResources().getColor(R.color.primary));
         activeButton.setBackgroundResource(R.drawable.buttonselected);
@@ -125,21 +202,25 @@ public class FragmentEquipo extends Fragment implements View.OnClickListener {
         }
     }
 
+    /**
+     * Cuando el usuari opulsa en una opción del menú
+     * @param v vista
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.bPartidosEquipo:
+            case R.id.bPartidosEquipo://Partidos
                 buttonPartidosListener.OnPartidosButtonPressed();
                 setActiveButton(bPartidosEquipo, new TextView[]{bResultadosEquipo,bPlantillaEquipo});
                 break;
 
-            case R.id.bResultadosEquipo:
+            case R.id.bResultadosEquipo://Resultados
                 buttonResultadosListener.OnResultadosButtonPressed();
                 setActiveButton(bResultadosEquipo, new TextView[]{bPartidosEquipo,bPlantillaEquipo});
                 break;
 
-            case R.id.bPlantillaEquipo:
+            case R.id.bPlantillaEquipo://Plantila
                 buttonPlantillaListener.OnPlantillaButtonPressed();
                 setActiveButton(bPlantillaEquipo, new TextView[]{bPartidosEquipo,bResultadosEquipo});
                 break;

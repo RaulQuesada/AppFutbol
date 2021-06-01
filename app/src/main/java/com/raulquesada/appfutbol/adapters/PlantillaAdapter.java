@@ -15,9 +15,20 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * The type Plantilla adapter.
+ */
 public class PlantillaAdapter extends RecyclerView.Adapter<PlantillaAdapter.PlantillaViewHolder> {
+    /**
+     * The Jugadors.
+     */
     private List<Jugador> jugadors;
 
+    /**
+     * Instantiates a new Plantilla adapter.
+     *
+     * @param jugadors the jugadors
+     */
     public PlantillaAdapter(List<Jugador> jugadors) {
         this.jugadors = jugadors;
     }
@@ -39,14 +50,40 @@ public class PlantillaAdapter extends RecyclerView.Adapter<PlantillaAdapter.Plan
         return jugadors.size();
     }
 
+    /**
+     * The type Plantilla view holder.
+     */
     public static class PlantillaViewHolder extends RecyclerView.ViewHolder{
+        /**
+         * The Tv pais jugador.
+         */
         private TextView tvPaisJugador;
+        /**
+         * The Tv dorsal jugador.
+         */
         private TextView tvDorsalJugador;
+        /**
+         * The Tv posicion jugador.
+         */
         private TextView tvPosicionJugador;
+        /**
+         * The Tv apellidos jugador.
+         */
         private TextView tvApellidosJugador;
+        /**
+         * The Tv nombre jugador.
+         */
         private TextView tvNombreJugador;
+        /**
+         * The Iv jugador plantilla.
+         */
         private ImageView ivJugadorPlantilla;
 
+        /**
+         * Instantiates a new Plantilla view holder.
+         *
+         * @param itemView the item view
+         */
         public PlantillaViewHolder(@NonNull View itemView) {
             super(itemView);
             this.tvPaisJugador = itemView.findViewById(R.id.tvPaisJugador);
@@ -57,25 +94,30 @@ public class PlantillaAdapter extends RecyclerView.Adapter<PlantillaAdapter.Plan
             this.ivJugadorPlantilla = itemView.findViewById(R.id.ivJugadorPlantilla);
         }
 
+        /**
+         * Bind partido.
+         *
+         * @param jugador the jugador
+         */
         public void bindPartido(Jugador jugador) {
             tvPaisJugador.setText(jugador.getCountryCode());
             tvDorsalJugador.setText(jugador.getSquadNumber());
             tvNombreJugador.setText(jugador.getName());
             tvApellidosJugador.setText(jugador.getLast_name());
             switch (Integer.parseInt(jugador.getRole())){
-                case 1:
+                case 1://Si el jugador es portero
                     tvPosicionJugador.setText("Portero");
                     break;
 
-                case 2:
+                case 2://Si el jugador es defensa
                     tvPosicionJugador.setText("Defensa");
                     break;
 
-                case 3:
+                case 3://Si el jugador es centrocampista
                     tvPosicionJugador.setText("Centrocampista");
                     break;
 
-                case 4:
+                case 4://Si el jugador es delantero
                     tvPosicionJugador.setText("Delantero");
             }
             Picasso.get()

@@ -3,10 +3,16 @@ package com.raulquesada.appfutbol.models;
 import org.junit.Assert;
 import org.junit.Test;
 
-class InfoLigaTest {
+/**
+ * The type Info liga test.
+ */
+public class InfoLigaTest {
 
+    /**
+     * Test info liga.
+     */
     @Test
-    void testInfoLiga(){
+    public void testInfoLiga(){
         final String CURRENT_ROUND = "30";
         final String TOTAL_ROUNDS = "38";
 

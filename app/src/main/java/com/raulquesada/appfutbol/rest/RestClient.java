@@ -34,6 +34,10 @@ public class RestClient {
         }
         return instance;
     }
+
+    /**
+     * Pone la Instancia a null
+     */
     public static void reset(){
         instance=null;
     }

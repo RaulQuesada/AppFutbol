@@ -34,13 +34,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentDirecto extends Fragment implements IGetPartidosListener, IGetLigaListener, IPartidoJornadaListener {
-    private int currentJornada;
+    private int currentJornada; //jornada actual
+    /**
+     * The Iv sad tv.
+     */
     private ImageView ivSadTv;
+    /**
+     * The Rv listado jornada.
+     */
     private RecyclerView rvListadoJornada;
+    /**
+     * The Tv jornada.
+     */
     private TextView tvJornada;
+    /**
+     * The Tv no live partidos.
+     */
     private TextView tvNoLivePartidos;
     private Button bSeleccionarJornada;
-    private APIManager apiManager;
+    private APIManager apiManager;//API manager
     private SharedPreferences myPrefs;//Mis preferencias
     private ConstraintLayout layoutDirecto;
 
@@ -52,6 +64,9 @@ public class FragmentDirecto extends Fragment implements IGetPartidosListener, I
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
+        //Inicializo variables y componentes
+
         super.onActivityCreated(savedInstanceState);
         ivSadTv = getView().findViewById(R.id.ivSadTv);
         ivSadTv.setVisibility(View.GONE);
@@ -71,6 +86,11 @@ public class FragmentDirecto extends Fragment implements IGetPartidosListener, I
         bSeleccionarJornada.setVisibility(View.GONE);
     }
 
+    /**
+     * Cuando recibo los partidos de la API
+     * Set adapter el RecyclerView con los partidos
+     * @param jornada con los partidos
+     */
     @Override
     public void OnGetPartidos(Jornada jornada) {
         rvListadoJornada.setAdapter(new JornadaAdapter(getLivePartidos(jornada), this));
@@ -78,6 +98,11 @@ public class FragmentDirecto extends Fragment implements IGetPartidosListener, I
         rvListadoJornada.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     }
 
+    /**
+     * Método el cual recibe una lista de partidos y aplica un filtro para quedarme con los que estan en directo
+     * @param jornada con los partidos
+     * @return partidos de la jornada en directo
+     */
     private List<Partido> getLivePartidos(Jornada jornada){
         List<Partido> partidos = new ArrayList<>();
 
@@ -86,7 +111,7 @@ public class FragmentDirecto extends Fragment implements IGetPartidosListener, I
                 partidos.add(jornada.getPartidos().get(i));
             }
         }
-        if (partidos.size()==0){
+        if (partidos.size()==0){//Si no hay partidos en directo se muestra el siguiente mensaje
             ivSadTv.setVisibility(View.VISIBLE);
             tvNoLivePartidos.setText("!No hay partidos en Directo ahora mismo!");
             layoutDirecto.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -97,12 +122,21 @@ public class FragmentDirecto extends Fragment implements IGetPartidosListener, I
         return partidos;
     }
 
+    /**
+     * Cuando recibo la información de la liga
+     * @param infoLiga información de la liga
+     */
     @Override
     public void OnGetLiga(InfoLiga infoLiga) {
         currentJornada = Integer.parseInt(infoLiga.getLeague().getCurrent_round());
         apiManager.getJornada(myPrefs.getInt("division",1), currentJornada);
     }
 
+    /**
+     * Cuando el usuario pincha en un partido
+     * Salta un diálogo con datos del partido
+     * @param partido seleccionado
+     */
     @Override
     public void onPartidoSeleccionado(Partido partido) {
         ResultDialog dialog = new ResultDialog(partido);
