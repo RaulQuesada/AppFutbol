@@ -3,6 +3,9 @@ package com.raulquesada.appfutbol.models;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The type Partido test.
  */
@@ -30,7 +33,8 @@ public class PartidoTest {
         final String COMPETITION_ID = "cid";
         final String RESULT = "result";
 
-        Canal[] caneles = new Canal[]{new Canal("1","movistarplus","urlimage")};
+        List<Canal> caneles = new ArrayList<>();
+        caneles.add(new Canal("1","movistarplus","urlimage"));
 
         Partido partidoTest = new Partido(JORNADA,LOCAL,VISITOR,LOCAL_SHIELD,VISITOR_SHIELD,DATE,HOUR,MINUTE,LOCAL_GOALS,VISITOR_GOALS,LIVE_MINUTE);
 
@@ -68,6 +72,6 @@ public class PartidoTest {
         Assert.assertEquals("cnametest",partidoTest.getCompetition_name());
         Assert.assertEquals("cidtest",partidoTest.getCompetition_id());
         Assert.assertEquals("resulttest",partidoTest.getResult());
-        Assert.assertEquals(1,partidoTest.getCanales().length);
+        Assert.assertEquals(1,partidoTest.getCanales().size());
     }
 }

@@ -27,6 +27,11 @@ public class Canal implements Serializable {
 
     /**
      * Instantiates a new Canal.
+     */
+    public Canal(){}
+
+    /**
+     * Instantiates a new Canal.
      *
      * @param id       the id
      * @param name     the name

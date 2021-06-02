@@ -131,15 +131,15 @@ public class ResultDialog extends DialogFragment {
                 .into(ivDialogResultVisitor);
 
         //Si no hay canales de retransmisión
-        if (partido.getCanales().length==0){
+        if (partido.getCanales().size()==0){
             ivDialogChannel.setVisibility(View.GONE);
             tvDialogChannel.setVisibility(View.GONE);
         //Si si los hay
         }else {
-            tvDialogChannel.setText(partido.getCanales()[0].getName());
+            tvDialogChannel.setText(partido.getCanales().get(0).getName());
 
             Picasso.get()
-                    .load(partido.getCanales()[0].getUrlImage())
+                    .load(partido.getCanales().get(0).getUrlImage())
                     .into(ivDialogChannel);
         }
     }

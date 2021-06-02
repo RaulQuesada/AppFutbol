@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * The type Partido.
@@ -130,7 +131,13 @@ public class Partido implements Serializable {
      */
     @SerializedName("channels")
     @Expose
-    private Canal[] canales;
+    private List<Canal> canales;
+
+    /**
+     * Instantiates a new Partido.
+     */
+    public Partido() {
+    }
 
     /**
      * Instantiates a new Partido.
@@ -166,7 +173,7 @@ public class Partido implements Serializable {
      *
      * @param canales the canales
      */
-    public void setCanales(Canal[] canales) {
+    public void setCanales(List<Canal> canales) {
         this.canales = canales;
     }
 
@@ -175,7 +182,7 @@ public class Partido implements Serializable {
      *
      * @return the canal [ ]
      */
-    public Canal[] getCanales() {
+    public List<Canal> getCanales() {
         return canales;
     }
 
@@ -486,7 +493,7 @@ public class Partido implements Serializable {
                 ", visitor_goals='" + visitor_goals + '\'' +
                 ", live_minute='" + live_minute + '\'' +
                 ", result='" + result + '\'' +
-                ", canales=" + Arrays.toString(canales) +
+                ", canales=" + canales +
                 '}';
     }
 }
