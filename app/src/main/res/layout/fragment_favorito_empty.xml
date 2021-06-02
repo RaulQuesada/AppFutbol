@@ -25,7 +25,7 @@
         android:layout_marginTop="10dp"
         android:paddingStart="40dp"
         android:paddingEnd="40dp"
-        android:text="¡No tienes equipos favoritos!\n\nPara poder ver los próximos partidos de tus equipos favoritos deberás seleccionar la estrella que tienen en su perfil.\n\nPuedes utilizar el buscador para encontrar los equipos más fácilmente."
+        android:text="¡No tienes equipos favoritos!\n\nPara poder ver los próximos partidos de tus equipos favoritos deberás seleccionar la estrella que tienen en su perfil."
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
